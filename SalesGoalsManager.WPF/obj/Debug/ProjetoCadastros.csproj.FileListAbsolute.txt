@@ -1,0 +1,73 @@
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\bin\Debug\ProjetoCadastros.exe.config
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\bin\Debug\ProjetoCadastros.exe
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\bin\Debug\ProjetoCadastros.pdb
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\App.g.cs
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros_MarkupCompile.cache
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros_MarkupCompile.lref
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.g.resources
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.Properties.Resources.resources
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.GenerateResource.cache
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.CoreCompileInputs.cache
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.exe
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.pdb
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaPessoa.g.cs
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csprojAssemblyReference.cache
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaPessoa.baml
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaPrincipal.g.cs
+C:\Users\douglas.menchon\source\repos\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaPrincipal.baml
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\bin\Debug\ProjetoCadastros.exe.config
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\bin\Debug\ProjetoCadastros.exe
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\bin\Debug\ProjetoCadastros.pdb
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csprojAssemblyReference.cache
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaPrincipal.g.cs
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\App.g.cs
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros_MarkupCompile.cache
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros_MarkupCompile.lref
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaPrincipal.baml
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.g.resources
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.Properties.Resources.resources
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.GenerateResource.cache
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.CoreCompileInputs.cache
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.exe
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.pdb
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaCadastroPessoa.g.cs
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaCadastroPessoa.baml
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaCadastroProduto.g.cs
+C:\Users\douglas.menchon\Desktop\Projeto\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaCadastroProduto.baml
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\bin\Debug\ProjetoCadastros.exe.config
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\bin\Debug\ProjetoCadastros.exe
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\bin\Debug\ProjetoCadastros.pdb
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.AssemblyReference.cache
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.SuggestedBindingRedirects.cache
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaCadastroPessoa.g.cs
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaCadastroProduto.g.cs
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaPrincipal.g.cs
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\App.g.cs
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros_MarkupCompile.cache
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros_MarkupCompile.lref
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaCadastroPessoa.baml
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaCadastroProduto.baml
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\Interface\TelaPrincipal.baml
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.g.resources
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.Properties.Resources.resources
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.GenerateResource.cache
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.CoreCompileInputs.cache
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.exe
+C:\Users\Douglas\Desktop\Programação\ProjetoParaEstudo\ProjetoCadastros\obj\Debug\ProjetoCadastros.pdb
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\bin\Debug\ProjetoCadastros.exe.config
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\bin\Debug\ProjetoCadastros.exe
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\bin\Debug\ProjetoCadastros.pdb
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.AssemblyReference.cache
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\Interface\TelaInicial.g.cs
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\App.g.cs
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\ProjetoCadastros_MarkupCompile.cache
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\ProjetoCadastros_MarkupCompile.lref
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\Interface\TelaInicial.baml
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\ProjetoCadastros.g.resources
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\ProjetoCadastros.Properties.Resources.resources
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.GenerateResource.cache
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\ProjetoCadastros.csproj.CoreCompileInputs.cache
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\ProjetoCadastros.exe
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\ProjetoCadastros.pdb
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\Interface\CadastroMeta.g.cs
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\ProjetoCadastros\obj\Debug\Interface\CadastroMeta.baml

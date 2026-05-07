@@ -1,0 +1,17 @@
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\bin\Debug\ProjetoCadastros.exe.config
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\bin\Debug\ProjetoCadastros.exe
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\bin\Debug\ProjetoCadastros.pdb
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\SalesGoalsManager.WPF.csproj.AssemblyReference.cache
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\Interface\CadastroMeta.g.cs
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\Interface\TelaInicial.g.cs
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\App.g.cs
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\ProjetoCadastros_MarkupCompile.cache
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\ProjetoCadastros_MarkupCompile.lref
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\Interface\CadastroMeta.baml
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\Interface\TelaInicial.baml
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\ProjetoCadastros.g.resources
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\ProjetoCadastros.Properties.Resources.resources
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\SalesGoalsManager.WPF.csproj.GenerateResource.cache
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\SalesGoalsManager.WPF.csproj.CoreCompileInputs.cache
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\ProjetoCadastros.exe
+C:\Users\Douglas\Desktop\Projeto MAUI\CadastroMeta\SalesGoalsManager.WPF\obj\Debug\ProjetoCadastros.pdb

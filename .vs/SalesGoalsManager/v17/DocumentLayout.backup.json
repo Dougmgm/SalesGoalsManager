@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Douglas\\Desktop\\Projeto MAUI\\CadastroMeta\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{74990BBC-2EE4-4061-95BD-47122865EB05}|SalesGoalsManager.WPF\\SalesGoalsManager.WPF.csproj|c:\\users\\douglas\\desktop\\projeto maui\\cadastrometa\\salesgoalsmanager.wpf\\interface\\viewmodel\\cadastrometaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74990BBC-2EE4-4061-95BD-47122865EB05}|SalesGoalsManager.WPF\\SalesGoalsManager.WPF.csproj|solutionrelative:salesgoalsmanager.wpf\\interface\\viewmodel\\cadastrometaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CadastroMetaViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Douglas\\Desktop\\Projeto MAUI\\CadastroMeta\\SalesGoalsManager.WPF\\Interface\\ViewModel\\CadastroMetaViewModel.cs",
+              "RelativeDocumentMoniker": "SalesGoalsManager.WPF\\Interface\\ViewModel\\CadastroMetaViewModel.cs",
+              "ToolTip": "C:\\Users\\Douglas\\Desktop\\Projeto MAUI\\CadastroMeta\\SalesGoalsManager.WPF\\Interface\\ViewModel\\CadastroMetaViewModel.cs",
+              "RelativeToolTip": "SalesGoalsManager.WPF\\Interface\\ViewModel\\CadastroMetaViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T01:25:20.767Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+﻿<Window x:Class="ProjetoCadastros.Interface.TelaPessoa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjetoCadastros.Interface"
+        mc:Ignorable="d"
+        Title="TelaPessoa" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        
+        
+        <StackPanel Grid.Column="0">
+            <Label>Id:</Label>
+            <TextBox Background="Green"
+                     Width="35"
+                     Height="20"
+                     HorizontalAlignment="Left"
+                     />
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Label>CPF:</Label>
+            <TextBox Background="Red"
+                     Width="85"
+                     Height="20"
+                     HorizontalAlignment="Left"
+                     />
+        </StackPanel>
+
+        <StackPanel Grid.ColumnSpan="2" Grid.Column="2">
+            <Label>Nome:</Label>
+            <TextBox Background="Blue"
+                     Width="200"
+                     Height="20"
+                     HorizontalAlignment="Left"
+                     />
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <Label>CEP:</Label>
+            <TextBox Background="Blue"
+                     Width="70"
+                     Height="20"
+                     HorizontalAlignment="Left"
+                     
+                     />
+        </StackPanel>
+
+        <StackPanel Grid.ColumnSpan="5" Grid.Column="1" Grid.Row="1">
+            <Label>Endereço:</Label>
+            <TextBox Background="Tan"
+                     Width="350"
+                     Height="20"
+                     HorizontalAlignment="Left"
+                     />
+        </StackPanel>
+
+        <StackPanel Grid.Column="4" Grid.Row="1">
+            <Label>Nº:</Label>
+            <TextBox Background="Yellow"
+                     Width="50"
+                     Height="20"
+                     HorizontalAlignment="Left"
+                     />
+        </StackPanel>
+
+        <StackPanel Grid.Column="5" Grid.Row="1">
+            <Label>Complemento:</Label>
+            <TextBox Background="Magenta"
+                     Width="50"
+                     Height="20"
+                     HorizontalAlignment="Left"
+                     />
+        </StackPanel>
+
+        <Button Content="Fazer cadastro"
+                Width="80"
+                Height="20"
+                Grid.Column="5"
+                Grid.Row="5"
+                />
+    </Grid>
+</Window>

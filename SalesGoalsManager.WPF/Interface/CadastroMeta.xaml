@@ -1,0 +1,152 @@
+﻿<Window x:Class="ProjetoCadastros.Interface.CadastroMeta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjetoCadastros.Interface"
+        mc:Ignorable="d"
+        Title="Meta" Height="210" Width="700"
+        ResizeMode="NoResize"
+        Background="#334355"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width=".4*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0"
+                    Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left">
+            
+            <Button Content="Limpar"
+                    Height="25"
+                    Width="80"
+                    Command="{Binding [CadastrarNovaPessoa]}" 
+                    Background="White"
+                    Margin="0,0,5,0">
+            </Button>
+
+            <Button Content="Duplicar Meta"
+                    Height="25"
+                    Width="100"
+                    Command="{Binding [DuplicarMeta]}" 
+                    Background="OrangeRed"
+                    Foreground="White"
+                    BorderBrush="White">
+            </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2"
+                    Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="Voltar (ESC)"
+                    Height="25"
+                    Width="80"
+                    Command="{Binding [CadastrarNovaPessoa]}" 
+                    Background="#334355"
+                    Foreground="White"
+                    BorderBrush="White"
+                    Margin="0,0,5,0">
+            </Button>
+
+            <Button Content="Salvar (F2)"
+                    Height="25"
+                    Width="80"
+                    Command="{Binding [CadastrarNovaPessoa]}" 
+                    Background="Gold"
+                    Foreground="Black"
+                    BorderBrush="White">
+            </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Margin="0, 10, 5, 0">
+
+            <StackPanel >
+                <TextBlock Text="Vendedor"
+                           Foreground="Gold"/>
+
+                <TextBox Height="20"
+                         Text="{Binding MetaVendedor.NomeVendedor}">
+
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="0, 10, 0, 0">
+
+                <StackPanel Grid.Column="0"
+                            Grid.Row="1"
+                            Margin="0, 5, 10, 0">
+                    <TextBlock Text="Periodicidade"
+                               Foreground="Gold"/>
+
+                    <ComboBox Height="20"
+                              ItemsSource="{Binding ListaPeriodicidades}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="0"
+                            Grid.Row="1"
+                            Margin="0, 5, 10, 0">
+                    <TextBlock Text="Produto"
+                               Foreground="Gold"/>
+
+                    <ComboBox Height="20"
+                              ItemsSource="{Binding ListaProdutos}"
+                              DisplayMemberPath="NomeProduto"
+                              SelectedValuePath="Handle"
+                              SelectedItem="{Binding ProdutoSelecionado}">
+
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="0"
+                            Grid.Row="1"
+                            Margin="0,5,5,0">
+                    <TextBlock Text="Valor da Meta"
+                               Foreground="Gold"/>
+
+                    <TextBox Height="20"
+                             Text="{Binding MetaVendedor.ValorMeta}">
+
+                    </TextBox>
+                </StackPanel>
+
+            </StackPanel>
+
+        </StackPanel>
+
+        <GroupBox Header="Meta"
+                  Grid.Column="2"
+                  Grid.Row="1"
+                  Foreground="Gold">
+            <StackPanel Orientation="Vertical"
+                        Margin="8">
+                <RadioButton Content="Monetário (R$)"
+                             GroupName="Meta"
+                             IsChecked="True"
+                             Margin="0,4"
+                             Foreground="Gold"/>
+                <RadioButton Content="Litros"
+                             GroupName="Meta"
+                             Margin="0,4"
+                             Foreground="Gold"/>
+                <RadioButton Content="Unidades"
+                             GroupName="Meta"
+                             Margin="0,4"
+                             Foreground="Gold"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
