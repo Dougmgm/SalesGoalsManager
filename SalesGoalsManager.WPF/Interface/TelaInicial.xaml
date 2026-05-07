@@ -45,13 +45,19 @@
             <StackPanel Grid.Column="1"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Button Content="IMAGEM"
-                        Name="btnLimparBusca"
+                <Button Name="btnLimparBusca"
                         Height="25"
                         Width="25"
                         Background="White"
                         Command="{Binding [LimparBusca]}"
-                        Margin="0, 0, 5, 0"/>
+                        Margin="0,0,5,0">
+
+                    <Image Source="/Imagens/5507757-200.png"
+                           Width="16"
+                           Height="16"/>
+
+                </Button>
+
                 <Button Content="Buscar (F11)"
                         Name="btnBuscar"
                         Height="25"
