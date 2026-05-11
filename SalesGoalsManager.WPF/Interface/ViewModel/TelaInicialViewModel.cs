@@ -41,7 +41,7 @@ namespace ProjetoCadastros.Interface.ViewModel
                 new MetaVendedorDto
                 {
                     NomeVendedor = "João da Silva",
-                    Periodicidade = Periodicidade.Mensal,
+                    Periodicidade = Periodicidade.Mensal.ToString(),
                     Produto = "Barris",
                     ValorMeta = 1500,
                     TipoMeta = "Unidades"
@@ -49,7 +49,7 @@ namespace ProjetoCadastros.Interface.ViewModel
                 new MetaVendedorDto
                 {
                     NomeVendedor = "Maria Santos",
-                    Periodicidade = Periodicidade.Semanal,
+                    Periodicidade = Periodicidade.Semanal.ToString(),
                     Produto = "Produto B",
                     TipoMeta = "Quantidade",
                     ValorMeta = 3000

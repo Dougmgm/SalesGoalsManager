@@ -32,9 +32,9 @@ namespace ProjetoCadastros.Interface.ViewModel
         {
             return new List<ProdutoDto>
             {
-                new ProdutoDto { Handle = 1, NomeProduto = "Barris", Categoria = CategoriaProduto.Liquido },
-                new ProdutoDto { Handle = 2, NomeProduto = "Garrafas e Latas", Categoria = CategoriaProduto.Liquido },
-                new ProdutoDto { Handle = 3, NomeProduto = "Acessórios e Produtos", Categoria = CategoriaProduto.Diversos }
+                new ProdutoDto { Id = 1.ToString(), NomeProduto = "Barris", Categoria = CategoriaProduto.Liquido },
+                new ProdutoDto { Id = 2.ToString(), NomeProduto = "Garrafas e Latas", Categoria = CategoriaProduto.Liquido },
+                new ProdutoDto { Id = 3.ToString(), NomeProduto = "Acessórios e Produtos", Categoria = CategoriaProduto.Diversos }
             };
         }
 

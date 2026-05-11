@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.35116.124
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesGoalsManager.WPF", "SalesGoalsManager.WPF\SalesGoalsManager.WPF.csproj", "{74990BBC-2EE4-4061-95BD-47122865EB05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesGoalsManager.Api", "SalesGoalsManager.Api\SalesGoalsManager.Api.csproj", "{0F6D503F-2353-45D5-A9F0-6375605D1692}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{74990BBC-2EE4-4061-95BD-47122865EB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74990BBC-2EE4-4061-95BD-47122865EB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74990BBC-2EE4-4061-95BD-47122865EB05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6D503F-2353-45D5-A9F0-6375605D1692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6D503F-2353-45D5-A9F0-6375605D1692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6D503F-2353-45D5-A9F0-6375605D1692}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6D503F-2353-45D5-A9F0-6375605D1692}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

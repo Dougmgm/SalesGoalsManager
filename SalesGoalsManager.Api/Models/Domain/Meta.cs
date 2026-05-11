@@ -1,9 +1,9 @@
-﻿namespace ProjetoCadastros.RegraDeNegocio.Dto
+﻿namespace SalesGoalsManager.Api.Models.Domain
 {
-    public class MetaVendedorDto
+    public class Meta
     {
-        public string Id { get; set; }
-        public string NomeVendedor { get; set; } //FK
+        public Guid Id { get; set; }
+        public Vendedore Vendedor { get; set; } //FK
         public string Periodicidade { get; set; }
         public string Produto { get; set; } //FK
         public string TipoMeta { get; set; }

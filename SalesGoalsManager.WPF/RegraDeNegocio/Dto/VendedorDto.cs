@@ -2,7 +2,7 @@
 {
     public class VendedorDto
     {
-        public int Handle { get; set; }
+        public string Id { get; set; }
         public string NomeVendedor { get; set; }
     }
 }
