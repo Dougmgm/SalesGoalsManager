@@ -1,4 +1,4 @@
-﻿using ProjetoCadastros.Interface.ViewModel;
+﻿using SalesGoalManager.RegraDeNegocio.Dto;
 
 namespace ProjetoCadastros.RegraDeNegocio.Dto
 {

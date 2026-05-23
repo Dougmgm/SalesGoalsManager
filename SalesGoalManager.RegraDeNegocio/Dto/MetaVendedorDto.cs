@@ -1,4 +1,4 @@
-﻿namespace ProjetoCadastros.RegraDeNegocio.Dto
+﻿namespace SalesGoalManager.RegraDeNegocio.Dto
 {
     public class MetaVendedorDto
     {
