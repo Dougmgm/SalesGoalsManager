@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="RegraDeNegocio\consulta\**" />
+    <EmbeddedResource Remove="RegraDeNegocio\consulta\**" />
+    <None Remove="RegraDeNegocio\consulta\**" />
+    <Page Remove="RegraDeNegocio\consulta\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Imagens\5507757-200.png" />
+  </ItemGroup>
+
+</Project>

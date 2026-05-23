@@ -1,5 +1,4 @@
-﻿using ProjetoCadastros.Enum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +10,6 @@ namespace ProjetoCadastros.RegraDeNegocio
     {
         public int IdPedido { get; set; }
         public List<ProdutoDto> Produtos { get; set; }
-        public TipoPagamentoEnum TipoPagamento { get; set; }
+        //public TipoPagamentoEnum TipoPagamento { get; set; }
     }
 }

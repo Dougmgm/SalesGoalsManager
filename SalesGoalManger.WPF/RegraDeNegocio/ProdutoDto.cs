@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetoCadastros.RegraDeNegocio
+namespace SalesGoalManger.RegraDeNegocio
 {
     public class ProdutoDto
     {
