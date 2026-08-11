@@ -3,13 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:conv="clr-namespace:SalesGoalManger.WPF.Interface.Converters"
         xmlns:local="clr-namespace:ProjetoCadastros.Interface"
         mc:Ignorable="d"
         Title="Meta" Height="210" Width="700"
         ResizeMode="NoResize"
         Background="#334355"
         WindowStartupLocation="CenterScreen">
-    
+
+    <Window.Resources>
+        <conv:DecimalMoedaConverter x:Key="MoedaConverter" />
+        <conv:StringIgualParametroConverter x:Key="StringIgualConverter"/>
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding [Voltar]}" />
+        <KeyBinding Key="F2" Command="{Binding [Salvar]}" />
+    </Window.InputBindings>
+
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height=".3*"/>
@@ -25,11 +36,11 @@
                     Grid.Row="0"
                     Orientation="Horizontal"
                     HorizontalAlignment="Left">
-            
+
             <Button Content="Limpar"
                     Height="25"
                     Width="80"
-                    Command="{Binding [CadastrarNovaPessoa]}" 
+                    Command="{Binding [Limpar]}" 
                     Background="White"
                     Margin="0,0,5,0">
             </Button>
@@ -37,7 +48,7 @@
             <Button Content="Duplicar Meta"
                     Height="25"
                     Width="100"
-                    Command="{Binding [DuplicarMeta]}" 
+                    Command="{Binding [DuplicarValorMeta]}" 
                     Background="OrangeRed"
                     Foreground="White"
                     BorderBrush="White">
@@ -51,7 +62,7 @@
             <Button Content="Voltar (ESC)"
                     Height="25"
                     Width="80"
-                    Command="{Binding [CadastrarNovaPessoa]}" 
+                    Command="{Binding [Voltar]}" 
                     Background="#334355"
                     Foreground="White"
                     BorderBrush="White"
@@ -61,7 +72,7 @@
             <Button Content="Salvar (F2)"
                     Height="25"
                     Width="80"
-                    Command="{Binding [CadastrarNovaPessoa]}" 
+                    Command="{Binding [Salvar]}" 
                     Background="Gold"
                     Foreground="Black"
                     BorderBrush="White">
@@ -78,7 +89,8 @@
                            Foreground="Gold"/>
 
                 <TextBox Height="20"
-                         Text="{Binding MetaVendedor.NomeVendedor}">
+                         Text="{Binding MetaVendedor.NomeVendedor, UpdateSourceTrigger=PropertyChanged}"
+                         CharacterCasing="Upper">
 
                 </TextBox>
             </StackPanel>
@@ -93,7 +105,9 @@
                                Foreground="Gold"/>
 
                     <ComboBox Height="20"
-                              ItemsSource="{Binding ListaPeriodicidades}" />
+                              Width="80"
+                              ItemsSource="{Binding ListaPeriodicidades}"
+                              SelectedItem="{Binding MetaVendedor.Periodicidade}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="0"
@@ -103,9 +117,9 @@
                                Foreground="Gold"/>
 
                     <ComboBox Height="20"
+                              Width="250"
                               ItemsSource="{Binding ListaProdutos}"
                               DisplayMemberPath="NomeProduto"
-                              SelectedValuePath="Handle"
                               SelectedItem="{Binding ProdutoSelecionado}">
 
                     </ComboBox>
@@ -118,7 +132,8 @@
                                Foreground="Gold"/>
 
                     <TextBox Height="20"
-                             Text="{Binding MetaVendedor.ValorMeta}">
+                             Text="{Binding MetaVendedor.ValorMeta, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource MoedaConverter}}"
+                             PreviewTextInput="TextBox_PreviewTextInput">
 
                     </TextBox>
                 </StackPanel>
@@ -128,24 +143,26 @@
         </StackPanel>
 
         <GroupBox Header="Meta"
-                  Grid.Column="2"
-                  Grid.Row="1"
-                  Foreground="Gold">
+          Grid.Column="2"
+          Grid.Row="1"
+          Foreground="Gold">
             <StackPanel Orientation="Vertical"
-                        Margin="8">
+                Margin="8">
                 <RadioButton Content="Monetário (R$)"
-                             GroupName="Meta"
-                             IsChecked="True"
-                             Margin="0,4"
-                             Foreground="Gold"/>
+                     GroupName="Meta"
+                     Margin="0,4"
+                     Foreground="Gold"
+                     IsChecked="{Binding MetaVendedor.TipoMeta, Converter={StaticResource StringIgualConverter}, ConverterParameter=Monetario}"/>
                 <RadioButton Content="Litros"
-                             GroupName="Meta"
-                             Margin="0,4"
-                             Foreground="Gold"/>
+                     GroupName="Meta"
+                     Margin="0,4"
+                     Foreground="Gold"
+                     IsChecked="{Binding MetaVendedor.TipoMeta, Converter={StaticResource StringIgualConverter}, ConverterParameter=Litros}"/>
                 <RadioButton Content="Unidades"
-                             GroupName="Meta"
-                             Margin="0,4"
-                             Foreground="Gold"/>
+                     GroupName="Meta"
+                     Margin="0,4"
+                     Foreground="Gold"
+                     IsChecked="{Binding MetaVendedor.TipoMeta, Converter={StaticResource StringIgualConverter}, ConverterParameter=Unidades}"/>
             </StackPanel>
         </GroupBox>
     </Grid>

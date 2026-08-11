@@ -14,6 +14,15 @@ namespace ProjetoCadastros.Interface.ViewModel
         public ObservableCollection<MetaVendedorDto> ListaMetas { get; set; }
 
         private ObservableCollection<MetaVendedorDto> _listaFiltrada;
+
+        private string _totalRegistros;
+
+        public string TotalRegistros
+        {
+            get => _totalRegistros;
+            set => SetProperty(ref _totalRegistros, value, nameof(TotalRegistros));
+        }
+
         public ObservableCollection<MetaVendedorDto> ListaFiltrada
         {
             get => _listaFiltrada;
@@ -32,6 +41,7 @@ namespace ProjetoCadastros.Interface.ViewModel
             Tela = new TelaInicialDto();
             CriarComandos();
             CarregarMockMetas();
+            DefinirTotalRegistros();
         }
 
         private void CarregarMockMetas()
@@ -41,17 +51,19 @@ namespace ProjetoCadastros.Interface.ViewModel
                 new MetaVendedorDto
                 {
                     NomeVendedor = "João da Silva",
-                    Periodicidade = Periodicidade.Mensal.ToString(),
-                    Produto = "Barris",
+                    Periodicidade = Periodicidade.Mensal,
+                    Produto = "1",
+                    ProdutoNome = "Barris",
                     ValorMeta = 1500,
                     TipoMeta = "Unidades"
                 },
                 new MetaVendedorDto
                 {
                     NomeVendedor = "Maria Santos",
-                    Periodicidade = Periodicidade.Semanal.ToString(),
-                    Produto = "Produto B",
-                    TipoMeta = "Quantidade",
+                    Periodicidade = Periodicidade.Semanal,
+                    Produto = "2",
+                    ProdutoNome = "Produto B",
+                    TipoMeta = "Litros",
                     ValorMeta = 3000
                 }
             };
@@ -64,20 +76,32 @@ namespace ProjetoCadastros.Interface.ViewModel
             _comandos["BuscarMeta"] = new RelayCommand(x => BuscarMeta());
             _comandos["ExcluirMeta"] = new RelayCommand(x => ExcluirMeta());
             _comandos["EditarMeta"] = new RelayCommand(x => EditarMeta());
-            _comandos["AdicionarMeta"] = new RelayCommand(x => AdicionarMeta());
             _comandos["CadastrarMeta"] = new RelayCommand(x => CadastrarMeta());
+        }
+
+        public void DefinirTotalRegistros(ObservableCollection<MetaVendedorDto> listaFiltrada = null)
+        {
+            var lista = listaFiltrada ?? ListaMetas;
+
+            TotalRegistros = $"{lista.Count} Registro(s)";
         }
 
         private void CadastrarMeta()
         {
-            var formCadastrarProduto = new CadastroMeta();
+            var formCadastrarProduto = new CadastroMeta(ListaMetas);
+
             formCadastrarProduto.ShowDialog();
+
+            ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
+
+            DefinirTotalRegistros();
         }
 
         public void LimparBusca()
         {
             Tela.TextoDeBusca = "";
             ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
+            DefinirTotalRegistros();
         }
 
         public void BuscarMeta()
@@ -86,11 +110,14 @@ namespace ProjetoCadastros.Interface.ViewModel
                 return;
 
             string termo = Tela.TextoDeBusca.Trim().ToUpper();
+
             var filtrado = ListaMetas.Where(x =>
                 x.NomeVendedor.ToUpper().Contains(termo) ||
-                x.Produto.ToUpper().Contains(termo) ||
+                x.ProdutoNome.ToUpper().Contains(termo) ||
                 x.TipoMeta.ToUpper().Contains(termo)).ToList();
             ListaFiltrada = new ObservableCollection<MetaVendedorDto>(filtrado);
+
+            DefinirTotalRegistros(ListaFiltrada);
         }
 
         public void ExcluirMeta()
@@ -105,6 +132,7 @@ namespace ProjetoCadastros.Interface.ViewModel
             {
                 ListaMetas.Remove(MetaSelecionada);
                 ListaFiltrada.Remove(MetaSelecionada);
+                DefinirTotalRegistros();
             }
         }
 
@@ -116,14 +144,13 @@ namespace ProjetoCadastros.Interface.ViewModel
                 return;
             }
 
-            var formCadastro = new CadastroMeta(MetaSelecionada);
+            var formCadastro = new CadastroMeta(MetaSelecionada, ListaMetas);
 
             formCadastro.ShowDialog();
+
             ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
-        }
-        public void AdicionarMeta() 
-        {
-            throw new NotImplementedException();
+
+            DefinirTotalRegistros();
         }
     }
 }

@@ -1,17 +1,25 @@
 ﻿using ProjetoCadastros.Comuns;
+using ProjetoCadastros.Extensoes;
+using ProjetoCadastros.Extensoes.Exceptions;
 using ProjetoCadastros.RegraDeNegocio;
 using ProjetoCadastros.RegraDeNegocio.Dto;
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows;
 using static ProjetoCadastros.RegraDeNegocio.ProdutoDto;
 
 namespace ProjetoCadastros.Interface.ViewModel
 {
     public class CadastroMetaViewModel : ViewModelBase
     {
+        public Action FecharJanela { get; set; }
+
         public MetaVendedorDto MetaVendedor { get; set; }
 
         public List<ProdutoDto> ListaProdutos { get; set; }
+
+        ObservableCollection<MetaVendedorDto> _listaMetas;
+
+        private bool _modoEdicao;
 
         private ProdutoDto _produtoSelecionado;
         public ProdutoDto ProdutoSelecionado
@@ -19,7 +27,11 @@ namespace ProjetoCadastros.Interface.ViewModel
             get => _produtoSelecionado;
             set
             {
-                _produtoSelecionado = value;
+                if (SetProperty(ref _produtoSelecionado, value, nameof(ProdutoSelecionado)))
+                {
+                    MetaVendedor.Produto = value?.Id;
+                    MetaVendedor.ProdutoNome = value?.NomeProduto;
+                }
             }
         }
 
@@ -40,68 +52,111 @@ namespace ProjetoCadastros.Interface.ViewModel
 
         public Array ListaPeriodicidades => Enum.GetValues(typeof(Periodicidade));
 
-        private Periodicidade _periodicidadeSelecionada;
-        public Periodicidade PeriodicidadeSelecionada
-        {
-            get => _periodicidadeSelecionada;
-            set
-            {
-                _periodicidadeSelecionada = value;
-            }
-        }
-
-        public CadastroMetaViewModel()
+        public CadastroMetaViewModel(ObservableCollection<MetaVendedorDto> listaMetas)
         {
             MetaVendedor = new MetaVendedorDto();
+
             CarregarDadosProduto();
+
+            _listaMetas = listaMetas;
+            _modoEdicao = false;
+
             CriarComandos();
         }
 
-        public CadastroMetaViewModel(MetaVendedorDto metaSelecionada) : this()
+        public CadastroMetaViewModel(MetaVendedorDto metaSelecionada, ObservableCollection<MetaVendedorDto> listaMetas)
         {
-            MetaVendedor = new MetaVendedorDto();
+            MetaVendedor = metaSelecionada; // referência direta, sem cópia
 
-            MetaVendedor.NomeVendedor = metaSelecionada.NomeVendedor;
-            MetaVendedor.Periodicidade = metaSelecionada.Periodicidade;
-            MetaVendedor.Produto = metaSelecionada.Produto;
-            MetaVendedor.TipoMeta = metaSelecionada.TipoMeta;
-            MetaVendedor.ValorMeta = metaSelecionada.ValorMeta;
+            CarregarDadosProduto();
+
+            _listaMetas = listaMetas;
+            _modoEdicao = true;
+
+            ProdutoSelecionado = ListaProdutos.FirstOrDefault(p => p.Id == MetaVendedor.Produto);
+
             CriarComandos();
         }
 
         public void CriarComandos()
         {
-            _comandos["DuplicarMeta"] = new RelayCommand(x => DuplicarMeta());
-            _comandos["BuscarMeta"] = new RelayCommand(x => BuscarMeta());
-            _comandos["ExcluirMeta"] = new RelayCommand(x => ExcluirMeta());
-            _comandos["EditarMeta"] = new RelayCommand(x => EditarMeta());
-            _comandos["AdicionarMeta"] = new RelayCommand(x => AdicionarMeta());
+            _comandos["DuplicarValorMeta"] = new RelayCommand(x => DuplicarValorMeta());
+            _comandos["Limpar"] = new RelayCommand(x => Limpar());
+            _comandos["Voltar"] = new RelayCommand(x => Voltar());
+            _comandos["Salvar"] = new RelayCommand(x => Salvar());
 
         }
 
-        public void DuplicarMeta()
+        public void DuplicarValorMeta()
         {
             MetaVendedor.ValorMeta = MetaVendedor.ValorMeta * 2;
         }
 
-        public void BuscarMeta()
+        public void Limpar()
         {
-           
+            MetaVendedor.NomeVendedor = null;
+            MetaVendedor.ValorMeta = 0;
+            //MetaVendedor.TipoMeta = null;
+            //MetaVendedor.Periodicidade = default;
+            //ProdutoSelecionado = null;
         }
 
-        public void ExcluirMeta()
+
+        public void Voltar()
         {
-           
+            if (MessageBox.Show(Constantes.MsgVoltarTelaInicial, "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                FecharJanela?.Invoke();
         }
 
-        public void EditarMeta()
+        public void Salvar()
         {
-          
+            if (!ValidarCampos())
+                return;
+
+            if (!_modoEdicao)
+            {
+                _listaMetas.Add(MetaVendedor);
+                MessageBox.Show(Constantes.MsgMetaCadastrada);
+            }
+            else
+                MessageBox.Show(Constantes.MsgMetaEditadaComSucesso);
+            
+            FecharJanela?.Invoke();
         }
 
-        public void AdicionarMeta()
+        public bool ValidarCampos()
         {
+            try
+            {
+                ValidarNome();
+                ValidarMeta();
+                ValidarTipoMeta();
 
+                return true;
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
+
+        public void ValidarNome()
+        {
+            if (MetaVendedor.NomeVendedor.IsNullOrEmpty())
+                throw new ValidacaoDadosException(Constantes.MsgVendedorNaoPreenchido);
+        }
+
+        public void ValidarMeta() 
+        {
+            if (MetaVendedor.ValorMeta.IsNull() || MetaVendedor.ValorMeta < 1)
+                throw new ValidacaoDadosException(Constantes.MsgValorMetaNaoPreenchida);
+        }
+
+        public void ValidarTipoMeta()
+        {
+            if (MetaVendedor.TipoMeta.IsNullOrEmpty())
+                throw new ValidacaoDadosException(Constantes.MsgTipoMetaNaoPreenchida);
         }
     }
 }

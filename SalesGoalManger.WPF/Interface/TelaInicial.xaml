@@ -8,7 +8,11 @@
         WindowStartupLocation="CenterScreen"
         Title="Bem vindo" Height="450" Width="815"
         Background="#334355">
-    
+
+    <Window.InputBindings>
+        <KeyBinding Key="F11" Command="{Binding [BuscarMeta]}" />
+    </Window.InputBindings>
+
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>
@@ -16,7 +20,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height=".2*"/>
+            <RowDefinition Height=".3*"/>
             <RowDefinition Height=".5*"/>
         </Grid.RowDefinitions>
 
@@ -27,9 +31,9 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0"
-             Grid.Row="0"
-            Grid.ColumnSpan="4"
-            Height="25">
+              Grid.Row="0"
+              Grid.ColumnSpan="4"
+              Height="25">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -37,7 +41,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBox Name="tbBuscarMeta"
-                     Text="{Binding Tela.TextoDeBusca}"
+                     Text="{Binding Tela.TextoDeBusca, UpdateSourceTrigger=PropertyChanged}"
+                     CharacterCasing="Upper"
                      Grid.Column="0"
                      VerticalAlignment="Stretch"
                      Margin="0, 0, 5, 0"/>
@@ -66,7 +71,8 @@
                         Command="{Binding [BuscarMeta]}"
                         FontFamily="Montserrat"
                         Foreground="White"
-                        BorderBrush="White"/>
+                        BorderBrush="White">
+                </Button>
             </StackPanel>
 
         </Grid>
@@ -83,13 +89,13 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vendedor" Binding="{Binding NomeVendedor}" Width="*"/>
                 <DataGridTextColumn Header="Periodicidade" Binding="{Binding Periodicidade}" Width="*"/>
-                <DataGridTextColumn Header="Produto" Binding="{Binding Produto}" Width="*"/>
+                <DataGridTextColumn Header="Produto" Binding="{Binding ProdutoNome}" Width="*"/>
                 <DataGridTextColumn Header="Tipo de Meta" Binding="{Binding TipoMeta}" Width="*"/>
                 <DataGridTextColumn Header="Meta" Binding="{Binding ValorMeta}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBlock Text="teste"
+        <TextBlock Text="{Binding TotalRegistros}"
                    Grid.Row="5"
                    Grid.Column="0"/>
                    
