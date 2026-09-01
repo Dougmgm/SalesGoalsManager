@@ -1,9 +1,8 @@
-﻿using ProjetoCadastros.Comuns;
-using ProjetoCadastros.Extensoes;
-using ProjetoCadastros.RegraDeNegocio.Dto;
-using System;
+﻿using SalesGoalManager.RegraDeNegocio.Comuns;
+using SalesGoalManager.RegraDeNegocio.Extensoes;
+using SalesGoalManger.WPF.Comuns;
+using SalesGoalManger.WPF.RegraDeNegocio.Dto;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 
 namespace ProjetoCadastros.Interface.ViewModel
@@ -67,6 +66,7 @@ namespace ProjetoCadastros.Interface.ViewModel
                     ValorMeta = 3000
                 }
             };
+
             ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
         }
 
@@ -100,7 +100,9 @@ namespace ProjetoCadastros.Interface.ViewModel
         public void LimparBusca()
         {
             Tela.TextoDeBusca = "";
+
             ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
+
             DefinirTotalRegistros();
         }
 

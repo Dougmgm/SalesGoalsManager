@@ -9,10 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensoes\**" />
     <Compile Remove="RegraDeNegocio\consulta\**" />
+    <EmbeddedResource Remove="Extensoes\**" />
     <EmbeddedResource Remove="RegraDeNegocio\consulta\**" />
+    <None Remove="Extensoes\**" />
     <None Remove="RegraDeNegocio\consulta\**" />
+    <Page Remove="Extensoes\**" />
     <Page Remove="RegraDeNegocio\consulta\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SalesGoalManager.RegraDeNegocio\SalesGoalManager.RegraDeNegocio.csproj" />
   </ItemGroup>
 
   <ItemGroup>

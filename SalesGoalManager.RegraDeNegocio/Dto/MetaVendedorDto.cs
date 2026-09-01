@@ -6,7 +6,7 @@
         public string NomeVendedor { get; set; } //FK
         public string Periodicidade { get; set; }
         public string Produto { get; set; } //FK
-        public string TipoMeta { get; set; }
+        public TipoMeta TipoMeta { get; set; }
         public decimal ValorMeta { get; set; }
     }
 }

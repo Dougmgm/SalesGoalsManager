@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace SalesGoalManger.WPF.Extensoes
+namespace SalesGoalManager.RegraDeNegocio.Extensoes
 {
     public class ExtensaoString
     {

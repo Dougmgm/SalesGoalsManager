@@ -1,6 +1,6 @@
-﻿using ProjetoCadastros.Comuns;
+﻿using SalesGoalManger.WPF.Comuns;
 
-namespace ProjetoCadastros.RegraDeNegocio.Dto
+namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
 {
     public class MetaVendedorDto : NotifyPropertyChangedBase
     {
@@ -17,7 +17,12 @@ namespace ProjetoCadastros.RegraDeNegocio.Dto
 
         public string ProdutoNome { get; set; }
 
-        public string TipoMeta { get; set; }
+        private string _tipoMeta;
+        public string TipoMeta
+        {
+            get => _tipoMeta;
+            set => SetProperty(ref _tipoMeta, value, nameof(TipoMeta));
+        }
 
         private string _nomeVendedor;
         public string NomeVendedor //FK

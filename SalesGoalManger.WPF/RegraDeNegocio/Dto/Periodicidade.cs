@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ProjetoCadastros.RegraDeNegocio.Dto
+namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
 {
     public enum Periodicidade
     {

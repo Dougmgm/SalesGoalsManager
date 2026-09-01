@@ -1,4 +1,4 @@
-﻿namespace ProjetoCadastros.RegraDeNegocio.Dto
+﻿namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
 {
     public class VendedorDto
     {

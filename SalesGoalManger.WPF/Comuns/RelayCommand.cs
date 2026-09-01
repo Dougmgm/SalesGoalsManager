@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace ProjetoCadastros.Comuns
+namespace SalesGoalManger.WPF.Comuns
 {
     public class RelayCommand : ICommand
     {

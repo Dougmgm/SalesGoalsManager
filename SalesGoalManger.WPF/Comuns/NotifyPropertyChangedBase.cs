@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
-namespace ProjetoCadastros.Comuns
+namespace SalesGoalManger.WPF.Comuns
 {
     public class NotifyPropertyChangedBase : INotifyPropertyChanged
     {

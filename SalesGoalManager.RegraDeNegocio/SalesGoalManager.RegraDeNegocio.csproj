@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensoes\Constantes.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Interface\" />
-    <Folder Include="Validacoes\" />
   </ItemGroup>
 
 </Project>

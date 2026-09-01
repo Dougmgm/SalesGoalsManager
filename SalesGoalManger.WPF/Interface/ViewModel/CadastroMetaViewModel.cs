@@ -1,11 +1,14 @@
-﻿using ProjetoCadastros.Comuns;
-using ProjetoCadastros.Extensoes;
-using ProjetoCadastros.Extensoes.Exceptions;
-using ProjetoCadastros.RegraDeNegocio;
-using ProjetoCadastros.RegraDeNegocio.Dto;
+﻿using SalesGoalManager.RegraDeNegocio.Comuns;
+using SalesGoalManager.RegraDeNegocio.Dto;
+using SalesGoalManager.RegraDeNegocio.Extensoes;
+using SalesGoalManager.RegraDeNegocio.Validacoes;
+using SalesGoalManger.WPF.Comuns;
 using System.Collections.ObjectModel;
 using System.Windows;
-using static ProjetoCadastros.RegraDeNegocio.ProdutoDto;
+using static SalesGoalManger.WPF.RegraDeNegocio.Dto.ProdutoDto;
+using MetaVendedorDto = SalesGoalManger.WPF.RegraDeNegocio.Dto.MetaVendedorDto;
+using Periodicidade = SalesGoalManger.WPF.RegraDeNegocio.Dto.Periodicidade;
+using ProdutoDto = SalesGoalManger.WPF.RegraDeNegocio.Dto.ProdutoDto;
 
 namespace ProjetoCadastros.Interface.ViewModel
 {
@@ -15,9 +18,12 @@ namespace ProjetoCadastros.Interface.ViewModel
 
         public MetaVendedorDto MetaVendedor { get; set; }
 
+        private MetaVendedorDto _metaOriginal;
+
         public List<ProdutoDto> ListaProdutos { get; set; }
 
         ObservableCollection<MetaVendedorDto> _listaMetas;
+
 
         private bool _modoEdicao;
 
@@ -66,7 +72,18 @@ namespace ProjetoCadastros.Interface.ViewModel
 
         public CadastroMetaViewModel(MetaVendedorDto metaSelecionada, ObservableCollection<MetaVendedorDto> listaMetas)
         {
-            MetaVendedor = metaSelecionada; // referência direta, sem cópia
+            _metaOriginal = metaSelecionada;
+
+            MetaVendedor = new MetaVendedorDto
+            {
+                Id = metaSelecionada.Id,
+                NomeVendedor = metaSelecionada.NomeVendedor,
+                Produto = metaSelecionada.Produto,
+                ProdutoNome = metaSelecionada.ProdutoNome,
+                Periodicidade = metaSelecionada.Periodicidade,
+                ValorMeta = metaSelecionada.ValorMeta,
+                TipoMeta = metaSelecionada.TipoMeta
+            };
 
             CarregarDadosProduto();
 
@@ -116,11 +133,21 @@ namespace ProjetoCadastros.Interface.ViewModel
             if (!_modoEdicao)
             {
                 _listaMetas.Add(MetaVendedor);
+
                 MessageBox.Show(Constantes.MsgMetaCadastrada);
             }
             else
+            {
+                _metaOriginal.NomeVendedor = MetaVendedor.NomeVendedor;
+                _metaOriginal.Produto = MetaVendedor.Produto;
+                _metaOriginal.ProdutoNome = MetaVendedor.ProdutoNome;
+                _metaOriginal.Periodicidade = MetaVendedor.Periodicidade;
+                _metaOriginal.ValorMeta = MetaVendedor.ValorMeta;
+                _metaOriginal.TipoMeta = MetaVendedor.TipoMeta;
+
                 MessageBox.Show(Constantes.MsgMetaEditadaComSucesso);
-            
+            }
+
             FecharJanela?.Invoke();
         }
 
@@ -128,35 +155,50 @@ namespace ProjetoCadastros.Interface.ViewModel
         {
             try
             {
-                ValidarNome();
-                ValidarMeta();
-                ValidarTipoMeta();
+                var validacao = new MetaVendedorValidacao();
 
-                return true;
+                var metaDto = ConverterMeta();
+
+                var produtoDto = ConverterProduto();
+
+                validacao.Validar(metaDto, produtoDto);
             }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
+            catch (Exception ex)
+            { 
+                MessageBox.Show(ex.Message);
                 return false;
             }
+
+            return true;
         }
 
-        public void ValidarNome()
+        private SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto ConverterMeta()
         {
-            if (MetaVendedor.NomeVendedor.IsNullOrEmpty())
-                throw new ValidacaoDadosException(Constantes.MsgVendedorNaoPreenchido);
+            Enum.TryParse<TipoMeta>(MetaVendedor.TipoMeta, out var tipoMeta);
+
+            return new SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto
+            {
+                Id = MetaVendedor.Id,
+                NomeVendedor = MetaVendedor.NomeVendedor,
+                Produto = MetaVendedor.Produto,
+                Periodicidade = MetaVendedor.Periodicidade.ToString(),
+                ValorMeta = MetaVendedor.ValorMeta,
+                TipoMeta = tipoMeta
+            };
         }
 
-        public void ValidarMeta() 
-        {
-            if (MetaVendedor.ValorMeta.IsNull() || MetaVendedor.ValorMeta < 1)
-                throw new ValidacaoDadosException(Constantes.MsgValorMetaNaoPreenchida);
-        }
+        private SalesGoalManager.RegraDeNegocio.Dto.ProdutoDto ConverterProduto()
 
-        public void ValidarTipoMeta()
         {
-            if (MetaVendedor.TipoMeta.IsNullOrEmpty())
-                throw new ValidacaoDadosException(Constantes.MsgTipoMetaNaoPreenchida);
-        }
+            if (ProdutoSelecionado.IsNull())
+                return null;
+
+            return new SalesGoalManager.RegraDeNegocio.Dto.ProdutoDto
+            {
+                Id = ProdutoSelecionado.Id,
+                NomeProduto = ProdutoSelecionado.NomeProduto,
+                Categoria = (SalesGoalManager.RegraDeNegocio.Dto.ProdutoDto.CategoriaProduto) ProdutoSelecionado.Categoria
+            };
+        }       
     }
 }

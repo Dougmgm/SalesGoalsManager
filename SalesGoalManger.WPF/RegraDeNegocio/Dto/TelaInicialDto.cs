@@ -1,6 +1,6 @@
 ﻿using ProjetoCadastros.Interface.ViewModel;
 
-namespace ProjetoCadastros.RegraDeNegocio.Dto
+namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
 {
     public class TelaInicialDto : ViewModelBase
     {

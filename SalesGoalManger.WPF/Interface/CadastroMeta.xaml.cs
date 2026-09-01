@@ -1,10 +1,7 @@
 ﻿using ProjetoCadastros.Interface.ViewModel;
-using ProjetoCadastros.RegraDeNegocio.Dto;
+using SalesGoalManger.WPF.RegraDeNegocio.Dto;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace ProjetoCadastros.Interface
 {
@@ -14,21 +11,18 @@ namespace ProjetoCadastros.Interface
     public partial class CadastroMeta : Window
     {
         public CadastroMeta(ObservableCollection<MetaVendedorDto> listaMetas)
+        : this(new CadastroMetaViewModel(listaMetas))
         {
-            InitializeComponent();
-
-            var viewModel = new CadastroMetaViewModel(listaMetas);
-
-            viewModel.FecharJanela = Close;
-
-            DataContext = viewModel;
         }
 
         public CadastroMeta(MetaVendedorDto metaSelecionada, ObservableCollection<MetaVendedorDto> listaMetas)
+            : this(new CadastroMetaViewModel(metaSelecionada, listaMetas))
+        {
+        }
+
+        private CadastroMeta(CadastroMetaViewModel viewModel)
         {
             InitializeComponent();
-
-            var viewModel = new CadastroMetaViewModel(metaSelecionada, listaMetas);
 
             viewModel.FecharJanela = Close;
 

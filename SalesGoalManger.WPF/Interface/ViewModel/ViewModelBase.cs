@@ -1,5 +1,4 @@
-﻿using ProjetoCadastros.Comuns;
-using System.Collections.Generic;
+﻿using SalesGoalManger.WPF.Comuns;
 using System.Windows.Input;
 
 namespace ProjetoCadastros.Interface.ViewModel
