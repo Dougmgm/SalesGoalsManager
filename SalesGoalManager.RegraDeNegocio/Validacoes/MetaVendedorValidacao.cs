@@ -11,10 +11,10 @@ namespace SalesGoalManager.RegraDeNegocio.Validacoes
         {
             var erros = new List<string>();
 
-            if (string.IsNullOrWhiteSpace(meta.NomeVendedor))
+            if (meta.NomeVendedor.IsNullOrEmpty())
                 erros.Add(Constantes.MsgVendedorNaoPreenchido);
 
-            if (produto is null)
+            if (produto.IsNull())
                 erros.Add(Constantes.MsgProdutoNaoPreenchido);
 
             if (meta.ValorMeta <= 0)
@@ -23,7 +23,7 @@ namespace SalesGoalManager.RegraDeNegocio.Validacoes
             if (meta.TipoMeta.IsEmpty())
                 erros.Add(Constantes.MsgTipoMetaNaoPreenchida);
 
-            if (meta.Periodicidade.IsNull())
+            if (!Enum.TryParse<Periodicidade>(meta.Periodicidade, out var periodicidade) || periodicidade.IsEmpty())
                 erros.Add(Constantes.MsgPeriodicidadeNaoPreenchida);
 
             if (produto is not null)

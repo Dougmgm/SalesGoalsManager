@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetoCadastros.Interface"
+        xmlns:conv="clr-namespace:SalesGoalManger.WPF.Interface.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Bem vindo" Height="450" Width="815"
@@ -12,6 +13,13 @@
     <Window.InputBindings>
         <KeyBinding Key="F11" Command="{Binding [BuscarMeta]}" />
     </Window.InputBindings>
+
+    <Window.Resources>
+        <conv:DecimalMoedaConverter x:Key="MoedaConverter" />
+        <conv:StringIgualParametroConverter x:Key="StringIgualConverter"/>
+        <conv:ValorMetaFormatoConverter x:Key="ValorMetaFormatoConverter"/>
+        <conv:ValorMetaExibicaoConverter x:Key="ValorMetaExibicaoConverter"/>
+    </Window.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -78,20 +86,27 @@
         </Grid>
 
         <DataGrid Grid.Row="1"
-                  Grid.RowSpan="4"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="3"
-                  ItemsSource="{Binding ListaFiltrada}"
-                  SelectedItem="{Binding MetaSelecionada}"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  IsReadOnly="True">
+          Grid.RowSpan="4"
+          Grid.Column="0"
+          Grid.ColumnSpan="3"
+          ItemsSource="{Binding ListaFiltrada}"
+          SelectedItem="{Binding MetaSelecionada}"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vendedor" Binding="{Binding NomeVendedor}" Width="*"/>
                 <DataGridTextColumn Header="Periodicidade" Binding="{Binding Periodicidade}" Width="*"/>
                 <DataGridTextColumn Header="Produto" Binding="{Binding ProdutoNome}" Width="*"/>
                 <DataGridTextColumn Header="Tipo de Meta" Binding="{Binding TipoMeta}" Width="*"/>
-                <DataGridTextColumn Header="Meta" Binding="{Binding ValorMeta}" Width="*"/>
+                <DataGridTextColumn Header="Meta">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding Converter="{StaticResource ValorMetaExibicaoConverter}">
+                            <Binding Path="ValorMeta"/>
+                            <Binding Path="TipoMeta"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

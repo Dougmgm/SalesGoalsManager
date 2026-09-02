@@ -1,4 +1,4 @@
-﻿using ProjetoCadastros.Interface.ViewModel;
+﻿using SalesGoalManger.WPF.Interface.ViewModel;
 using SalesGoalManger.WPF.RegraDeNegocio.Dto;
 using System.Collections.ObjectModel;
 using System.Windows;

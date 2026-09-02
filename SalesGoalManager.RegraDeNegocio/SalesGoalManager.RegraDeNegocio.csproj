@@ -10,8 +10,4 @@
     <Compile Remove="Extensoes\Constantes.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interface\" />
-  </ItemGroup>
-
 </Project>

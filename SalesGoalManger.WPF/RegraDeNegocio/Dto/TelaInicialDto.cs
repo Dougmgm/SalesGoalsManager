@@ -1,4 +1,4 @@
-﻿using ProjetoCadastros.Interface.ViewModel;
+﻿using SalesGoalManger.WPF.Interface.ViewModel;
 
 namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
 {

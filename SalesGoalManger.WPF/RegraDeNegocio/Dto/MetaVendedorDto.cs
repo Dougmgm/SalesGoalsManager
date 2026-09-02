@@ -1,4 +1,5 @@
-﻿using SalesGoalManger.WPF.Comuns;
+﻿using SalesGoalManager.RegraDeNegocio.Dto;
+using SalesGoalManger.WPF.Comuns;
 
 namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
 {
@@ -17,11 +18,18 @@ namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
 
         public string ProdutoNome { get; set; }
 
-        private string _tipoMeta;
-        public string TipoMeta
+        private TipoMeta _tipoMeta;
+        public TipoMeta TipoMeta
         {
             get => _tipoMeta;
-            set => SetProperty(ref _tipoMeta, value, nameof(TipoMeta));
+            set
+            {
+                if (SetProperty(ref _tipoMeta, value, nameof(TipoMeta)))
+                {
+                    if (_tipoMeta != TipoMeta.Monetario)
+                        ValorMeta = Math.Truncate(ValorMeta);
+                }
+            }
         }
 
         private string _nomeVendedor;

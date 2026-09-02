@@ -14,6 +14,7 @@
     <Window.Resources>
         <conv:DecimalMoedaConverter x:Key="MoedaConverter" />
         <conv:StringIgualParametroConverter x:Key="StringIgualConverter"/>
+        <conv:ValorMetaFormatoConverter x:Key="ValorMetaFormatoConverter"/>
     </Window.Resources>
 
     <Window.InputBindings>
@@ -130,11 +131,15 @@
                             Margin="0,5,5,0">
                     <TextBlock Text="Valor da Meta"
                                Foreground="Gold"/>
-
                     <TextBox Height="20"
-                             Text="{Binding MetaVendedor.ValorMeta, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource MoedaConverter}}"
                              PreviewTextInput="TextBox_PreviewTextInput">
-
+                        <TextBox.Text>
+                            <MultiBinding Converter="{StaticResource ValorMetaFormatoConverter}"
+                                          UpdateSourceTrigger="PropertyChanged">
+                                <Binding Path="MetaVendedor.ValorMeta"/>
+                                <Binding Path="MetaVendedor.TipoMeta"/>
+                            </MultiBinding>
+                        </TextBox.Text>
                     </TextBox>
                 </StackPanel>
 

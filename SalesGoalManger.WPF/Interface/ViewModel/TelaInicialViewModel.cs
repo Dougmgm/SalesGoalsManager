@@ -1,11 +1,15 @@
-﻿using SalesGoalManager.RegraDeNegocio.Comuns;
+﻿using ProjetoCadastros.Interface;
+using SalesGoalManager.RegraDeNegocio.Comuns;
+using SalesGoalManager.RegraDeNegocio.Dto;
 using SalesGoalManager.RegraDeNegocio.Extensoes;
 using SalesGoalManger.WPF.Comuns;
 using SalesGoalManger.WPF.RegraDeNegocio.Dto;
 using System.Collections.ObjectModel;
 using System.Windows;
+using MetaVendedorDto = SalesGoalManger.WPF.RegraDeNegocio.Dto.MetaVendedorDto;
+using Periodicidade = SalesGoalManger.WPF.RegraDeNegocio.Dto.Periodicidade;
 
-namespace ProjetoCadastros.Interface.ViewModel
+namespace SalesGoalManger.WPF.Interface.ViewModel
 {
     public class TelaInicialViewModel : ViewModelBase
     {
@@ -54,7 +58,7 @@ namespace ProjetoCadastros.Interface.ViewModel
                     Produto = "1",
                     ProdutoNome = "Barris",
                     ValorMeta = 1500,
-                    TipoMeta = "Unidades"
+                    TipoMeta = TipoMeta.Unidades
                 },
                 new MetaVendedorDto
                 {
@@ -62,7 +66,7 @@ namespace ProjetoCadastros.Interface.ViewModel
                     Periodicidade = Periodicidade.Semanal,
                     Produto = "2",
                     ProdutoNome = "Produto B",
-                    TipoMeta = "Litros",
+                    TipoMeta = TipoMeta.Litros,
                     ValorMeta = 3000
                 }
             };
@@ -116,7 +120,8 @@ namespace ProjetoCadastros.Interface.ViewModel
             var filtrado = ListaMetas.Where(x =>
                 x.NomeVendedor.ToUpper().Contains(termo) ||
                 x.ProdutoNome.ToUpper().Contains(termo) ||
-                x.TipoMeta.ToUpper().Contains(termo)).ToList();
+                x.TipoMeta.ToString().ToUpper().Contains(termo)).ToList();
+
             ListaFiltrada = new ObservableCollection<MetaVendedorDto>(filtrado);
 
             DefinirTotalRegistros(ListaFiltrada);

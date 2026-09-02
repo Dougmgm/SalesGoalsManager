@@ -67,31 +67,6 @@ namespace SalesGoalManager.RegraDeNegocio.Extensoes
             return propertyTypeA;
         }
 
-        /// <summary>
-        /// Retornar o valor do enumerador definido na classe como XmlEnum
-        /// Ex.:  [XmlEnum("1001")]
-        ///       Item1001,
-        /// </summary>
-        public static String ToStringXmlValue(this Enum nType)
-        {
-            if (nType == null)
-                throw new ArgumentNullException(nameof(nType));
-
-            Type oSystype = nType.GetType();
-            string strName = System.Enum.GetName(oSystype, nType);
-            FieldInfo oFieldInfo = oSystype.GetField(strName);
-            object[] rgObjs = oFieldInfo.GetCustomAttributes(typeof(XmlEnumAttribute), false);
-            foreach (object obj in rgObjs)
-            {
-                XmlEnumAttribute oDesc = obj as XmlEnumAttribute;
-                if (oDesc != null)
-                {
-                    return oDesc.Name;
-                }
-            }
-
-            return "0";
-        }
 
         public static string GetDescription<T>(this T enumerationValue) where T : struct
         {

@@ -10,7 +10,7 @@ using MetaVendedorDto = SalesGoalManger.WPF.RegraDeNegocio.Dto.MetaVendedorDto;
 using Periodicidade = SalesGoalManger.WPF.RegraDeNegocio.Dto.Periodicidade;
 using ProdutoDto = SalesGoalManger.WPF.RegraDeNegocio.Dto.ProdutoDto;
 
-namespace ProjetoCadastros.Interface.ViewModel
+namespace SalesGoalManger.WPF.Interface.ViewModel
 {
     public class CadastroMetaViewModel : ViewModelBase
     {
@@ -164,7 +164,7 @@ namespace ProjetoCadastros.Interface.ViewModel
                 validacao.Validar(metaDto, produtoDto);
             }
             catch (Exception ex)
-            { 
+            {
                 MessageBox.Show(ex.Message);
                 return false;
             }
@@ -174,8 +174,6 @@ namespace ProjetoCadastros.Interface.ViewModel
 
         private SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto ConverterMeta()
         {
-            Enum.TryParse<TipoMeta>(MetaVendedor.TipoMeta, out var tipoMeta);
-
             return new SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto
             {
                 Id = MetaVendedor.Id,
@@ -183,7 +181,7 @@ namespace ProjetoCadastros.Interface.ViewModel
                 Produto = MetaVendedor.Produto,
                 Periodicidade = MetaVendedor.Periodicidade.ToString(),
                 ValorMeta = MetaVendedor.ValorMeta,
-                TipoMeta = tipoMeta
+                TipoMeta = MetaVendedor.TipoMeta
             };
         }
 
@@ -197,8 +195,8 @@ namespace ProjetoCadastros.Interface.ViewModel
             {
                 Id = ProdutoSelecionado.Id,
                 NomeProduto = ProdutoSelecionado.NomeProduto,
-                Categoria = (SalesGoalManager.RegraDeNegocio.Dto.ProdutoDto.CategoriaProduto) ProdutoSelecionado.Categoria
+                Categoria = (SalesGoalManager.RegraDeNegocio.Dto.ProdutoDto.CategoriaProduto)ProdutoSelecionado.Categoria
             };
-        }       
+        }
     }
 }

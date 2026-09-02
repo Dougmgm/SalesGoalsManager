@@ -1,7 +1,7 @@
 ﻿using SalesGoalManger.WPF.Comuns;
 using System.Windows.Input;
 
-namespace ProjetoCadastros.Interface.ViewModel
+namespace SalesGoalManger.WPF.Interface.ViewModel
 {
     public class ViewModelBase : NotifyPropertyChangedBase
     {
