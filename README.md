@@ -93,7 +93,7 @@ Ferramentas:
 
 ## Testes
 
-...
+Será executado testes unitários utilizando XUnit
 
 ## Autor
 
