@@ -161,7 +161,9 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
 
                 var produtoDto = ConverterProduto();
 
-                validacao.Validar(metaDto, produtoDto);
+                var metasExistentes = ConverterListaMetas();
+
+                validacao.Validar(metaDto, metasExistentes, produtoDto);
             }
             catch (Exception ex)
             {
@@ -197,6 +199,21 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
                 NomeProduto = ProdutoSelecionado.NomeProduto,
                 Categoria = (SalesGoalManager.RegraDeNegocio.Dto.ProdutoDto.CategoriaProduto)ProdutoSelecionado.Categoria
             };
+        }
+
+        private ObservableCollection<SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto> ConverterListaMetas()
+        {
+            return new ObservableCollection<SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto>(
+                _listaMetas.Select(meta => new SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto
+                {
+                    Id = meta.Id,
+                    NomeVendedor = meta.NomeVendedor,
+                    Produto = meta.Produto,
+                    Periodicidade = meta.Periodicidade.ToString(),
+                    ValorMeta = meta.ValorMeta,
+                    TipoMeta = meta.TipoMeta
+                })
+            );
         }
     }
 }

@@ -53,6 +53,7 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
             {
                 new MetaVendedorDto
                 {
+                    Id = "1",
                     NomeVendedor = "João da Silva",
                     Periodicidade = Periodicidade.Mensal,
                     Produto = "1",
@@ -62,6 +63,7 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
                 },
                 new MetaVendedorDto
                 {
+                    Id = "2",
                     NomeVendedor = "Maria Santos",
                     Periodicidade = Periodicidade.Semanal,
                     Produto = "2",

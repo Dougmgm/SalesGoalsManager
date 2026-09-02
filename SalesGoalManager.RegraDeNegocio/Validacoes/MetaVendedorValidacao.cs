@@ -2,12 +2,13 @@
 using SalesGoalManager.RegraDeNegocio.Dto;
 using SalesGoalManager.RegraDeNegocio.Extensoes;
 using SalesGoalManager.RegraDeNegocio.Extensoes.Exceptions;
+using System.Collections.ObjectModel;
 
 namespace SalesGoalManager.RegraDeNegocio.Validacoes
 {
     public class MetaVendedorValidacao
     {
-        public void Validar(MetaVendedorDto meta, ProdutoDto produto)
+        public void Validar(MetaVendedorDto meta, ObservableCollection<MetaVendedorDto> metasExistentes, ProdutoDto produto)
         {
             var erros = new List<string>();
 
@@ -29,8 +30,22 @@ namespace SalesGoalManager.RegraDeNegocio.Validacoes
             if (produto is not null)
                 ValidarCompatibilidadeTipoMetaProduto(meta, produto, erros);
 
+            ValidarMetaRepetida(meta, metasExistentes, erros);
+
             if (erros.Any())
                 throw new ValidacaoDadosException(string.Join(Environment.NewLine, erros));
+        }
+
+        public void ValidarMetaRepetida(MetaVendedorDto meta, ObservableCollection<MetaVendedorDto> metasExistentes, List<string> erros)
+        {
+            bool jaExiste = metasExistentes.Any(m =>
+                m.Id != meta.Id && 
+                m.NomeVendedor == meta.NomeVendedor &&
+                m.Produto == meta.Produto &&
+                m.Periodicidade == meta.Periodicidade);
+
+            if (jaExiste)
+                erros.Add(Constantes.MsgMetaVendedorCadastrada);
         }
 
         private void ValidarCompatibilidadeTipoMetaProduto(MetaVendedorDto meta, ProdutoDto produto, List<string> erros)
