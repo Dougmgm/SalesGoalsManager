@@ -30,9 +30,7 @@ namespace SalesGoalManger.WPF.Interface.Converters
             if (string.IsNullOrEmpty(digitos))
                 digitos = "0";
 
-            decimal valor = _ultimoTipoMeta == TipoMeta.Monetario
-                ? decimal.Parse(digitos, PtBr) / 100m
-                : decimal.Parse(digitos, PtBr);
+            decimal valor = _ultimoTipoMeta == TipoMeta.Monetario ? decimal.Parse(digitos, PtBr) / 100m : decimal.Parse(digitos, PtBr);
 
             return new object[] { valor, Binding.DoNothing };
         }

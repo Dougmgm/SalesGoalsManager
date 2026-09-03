@@ -1,7 +1,6 @@
-﻿using SalesGoalManger.WPF.Comuns;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace SalesGoalManger.WPF.Interface.ViewModel
+namespace SalesGoalManger.WPF.Comuns
 {
     public class ViewModelBase : NotifyPropertyChangedBase
     {

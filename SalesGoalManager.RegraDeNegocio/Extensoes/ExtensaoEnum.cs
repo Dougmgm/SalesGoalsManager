@@ -13,12 +13,6 @@ namespace SalesGoalManager.RegraDeNegocio.Extensoes
             return Convert.ToInt32(enumerationValue) == 0;
         }
 
-        /// <summary>
-        /// Converte um valor de um Enum para outro Enum
-        /// </summary>
-        /// <typeparam name="M">Enum de saída</typeparam>
-        /// <param name="mensagemEsperada">Mensagem padronizada em caso de não se encontrar um valor equivalente</param>
-        /// <returns>Valor do Enum de saída</returns>
         public static M ParseTo<M>(this Enum valor, string mensagemEsperada = "")
         {
             if (valor == null)

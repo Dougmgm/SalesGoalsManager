@@ -1,4 +1,4 @@
-﻿using SalesGoalManger.WPF.Interface.ViewModel;
+﻿using SalesGoalManger.WPF.Comuns;
 
 namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
 {

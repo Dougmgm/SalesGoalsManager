@@ -1,5 +1,4 @@
 ﻿using SalesGoalManager.RegraDeNegocio.Comuns;
-using SalesGoalManager.RegraDeNegocio.Dto;
 using SalesGoalManager.RegraDeNegocio.Extensoes;
 using SalesGoalManager.RegraDeNegocio.Validacoes;
 using SalesGoalManger.WPF.Comuns;
