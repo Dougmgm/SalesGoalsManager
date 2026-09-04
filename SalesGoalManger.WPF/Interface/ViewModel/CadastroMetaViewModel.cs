@@ -2,15 +2,11 @@
 using SalesGoalManager.RegraDeNegocio.Cadastros;
 using SalesGoalManager.RegraDeNegocio.Comuns;
 using SalesGoalManager.RegraDeNegocio.Consultas;
-using SalesGoalManager.RegraDeNegocio.Extensoes;
-using SalesGoalManager.RegraDeNegocio.Validacoes;
+using SalesGoalManager.RegraDeNegocio.Dto;
 using SalesGoalManger.WPF.Comuns;
+using WpfDto = SalesGoalManger.WPF.RegraDeNegocio.Dto;
 using System.Collections.ObjectModel;
 using System.Windows;
-using static SalesGoalManger.WPF.RegraDeNegocio.Dto.ProdutoDto;
-using MetaVendedorDto = SalesGoalManger.WPF.RegraDeNegocio.Dto.MetaVendedorDto;
-using Periodicidade = SalesGoalManger.WPF.RegraDeNegocio.Dto.Periodicidade;
-using ProdutoDto = SalesGoalManger.WPF.RegraDeNegocio.Dto.ProdutoDto;
 
 namespace SalesGoalManger.WPF.Interface.ViewModel
 {
@@ -18,13 +14,9 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
     {
         public Action FecharJanela { get; set; }
 
-        public MetaVendedorDto MetaVendedor { get; set; }
+        public WpfDto.MetaVendedorDto MetaVendedor { get; set; }
 
-        private MetaVendedorDto _metaOriginal;
-
-        public List<ProdutoDto> ListaProdutos { get; set; }
-
-        ObservableCollection<MetaVendedorDto> _listaMetas;
+        private WpfDto.MetaVendedorDto _metaOriginal;
 
         private bool _modoEdicao;
 
@@ -32,6 +24,19 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
         private readonly ProdutoConsulta _produtoConsulta = Fabrica.CriarProdutoConsulta();
         private readonly VendedorConsulta _vendedorConsulta = Fabrica.CriarVendedorConsulta();
 
+        private List<ProdutoDto> _listaProdutos;
+        public List<ProdutoDto> ListaProdutos
+        {
+            get => _listaProdutos;
+            set => SetProperty(ref _listaProdutos, value, nameof(ListaProdutos));
+        }
+
+        private List<VendedorDto> _listaVendedores;
+        public List<VendedorDto> ListaVendedores
+        {
+            get => _listaVendedores;
+            set => SetProperty(ref _listaVendedores, value, nameof(ListaVendedores));
+        }
 
         private ProdutoDto _produtoSelecionado;
         public ProdutoDto ProdutoSelecionado
@@ -47,42 +52,39 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
             }
         }
 
-        public void CarregarDadosProduto()
+        private VendedorDto _vendedorSelecionado;
+        public VendedorDto VendedorSelecionado
         {
-            ListaProdutos = ObterProdutos();
-        }
-
-        private List<ProdutoDto> ObterProdutos()
-        {
-            return new List<ProdutoDto>
+            get => _vendedorSelecionado;
+            set
             {
-                new ProdutoDto { Id = 1.ToString(), NomeProduto = "Barris", Categoria = CategoriaProduto.Liquido },
-                new ProdutoDto { Id = 2.ToString(), NomeProduto = "Garrafas e Latas", Categoria = CategoriaProduto.Liquido },
-                new ProdutoDto { Id = 3.ToString(), NomeProduto = "Acessórios e Produtos", Categoria = CategoriaProduto.Diversos }
-            };
+                if (SetProperty(ref _vendedorSelecionado, value, nameof(VendedorSelecionado)))
+                {
+                    MetaVendedor.Vendedor = value?.Id;
+                    MetaVendedor.NomeVendedor = value?.NomeVendedor;
+                }
+            }
         }
 
-        public Array ListaPeriodicidades => Enum.GetValues(typeof(Periodicidade));
+        public Array ListaPeriodicidades => Enum.GetValues(typeof(WpfDto.Periodicidade));
 
-        public CadastroMetaViewModel(ObservableCollection<MetaVendedorDto> listaMetas)
+        public CadastroMetaViewModel(ObservableCollection<WpfDto.MetaVendedorDto> listaMetas)
         {
-            MetaVendedor = new MetaVendedorDto();
-
-            CarregarDadosProduto();
-
-            _listaMetas = listaMetas;
+            MetaVendedor = new WpfDto.MetaVendedorDto();
             _modoEdicao = false;
 
             CriarComandos();
+            _ = CarregarDadosIniciaisAsync();
         }
 
-        public CadastroMetaViewModel(MetaVendedorDto metaSelecionada, ObservableCollection<MetaVendedorDto> listaMetas)
+        public CadastroMetaViewModel(WpfDto.MetaVendedorDto metaSelecionada, ObservableCollection<WpfDto.MetaVendedorDto> listaMetas)
         {
             _metaOriginal = metaSelecionada;
 
-            MetaVendedor = new MetaVendedorDto
+            MetaVendedor = new WpfDto.MetaVendedorDto
             {
                 Id = metaSelecionada.Id,
+                Vendedor = metaSelecionada.Vendedor,
                 NomeVendedor = metaSelecionada.NomeVendedor,
                 Produto = metaSelecionada.Produto,
                 ProdutoNome = metaSelecionada.ProdutoNome,
@@ -91,14 +93,29 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
                 TipoMeta = metaSelecionada.TipoMeta
             };
 
-            CarregarDadosProduto();
-
-            _listaMetas = listaMetas;
             _modoEdicao = true;
 
-            ProdutoSelecionado = ListaProdutos.FirstOrDefault(p => p.Id == MetaVendedor.Produto);
-
             CriarComandos();
+            _ = CarregarDadosIniciaisAsync(preSelecionar: true);
+        }
+
+        private async Task CarregarDadosIniciaisAsync(bool preSelecionar = false)
+        {
+            try
+            {
+                ListaProdutos = await _produtoConsulta.ListarTodosAsync();
+                ListaVendedores = await _vendedorConsulta.ListarTodosAsync();
+
+                if (preSelecionar)
+                {
+                    ProdutoSelecionado = ListaProdutos.FirstOrDefault(p => p.Id == MetaVendedor.Produto);
+                    VendedorSelecionado = ListaVendedores.FirstOrDefault(v => v.Id == MetaVendedor.Vendedor);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao carregar dados: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void CriarComandos()
@@ -106,8 +123,7 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
             _comandos["DuplicarValorMeta"] = new RelayCommand(x => DuplicarValorMeta());
             _comandos["Limpar"] = new RelayCommand(x => Limpar());
             _comandos["Voltar"] = new RelayCommand(x => Voltar());
-            _comandos["Salvar"] = new RelayCommand(x => Salvar());
-
+            _comandos["Salvar"] = new RelayCommand(async x => await SalvarAsync());
         }
 
         public void DuplicarValorMeta()
@@ -119,11 +135,7 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
         {
             MetaVendedor.NomeVendedor = null;
             MetaVendedor.ValorMeta = 0;
-            //MetaVendedor.TipoMeta = null;
-            //MetaVendedor.Periodicidade = default;
-            //ProdutoSelecionado = null;
         }
-
 
         public void Voltar()
         {
@@ -131,11 +143,13 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
                 FecharJanela?.Invoke();
         }
 
-        public void Salvar()
+        public async Task SalvarAsync()
         {
             try
             {
-                await _metaCadastro.SalvarAsync(MetaVendedor, ProdutoSelecionado);
+                var metaParaSalvar = MetaVendedorMapper.ParaRegraDeNegocio(MetaVendedor);
+
+                await _metaCadastro.SalvarAsync(metaParaSalvar, ProdutoSelecionado);
 
                 MessageBox.Show(_modoEdicao ? Constantes.MsgMetaEditadaComSucesso : Constantes.MsgMetaCadastrada);
                 FecharJanela?.Invoke();
@@ -144,98 +158,6 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
             {
                 MessageBox.Show(ex.Message);
             }
-
-
-
-
-
-            if (!ValidarCampos())
-                return;
-
-            if (!_modoEdicao)
-            {
-                _listaMetas.Add(MetaVendedor);
-
-                MessageBox.Show(Constantes.MsgMetaCadastrada);
-            }
-            else
-            {
-                _metaOriginal.NomeVendedor = MetaVendedor.NomeVendedor;
-                _metaOriginal.Produto = MetaVendedor.Produto;
-                _metaOriginal.ProdutoNome = MetaVendedor.ProdutoNome;
-                _metaOriginal.Periodicidade = MetaVendedor.Periodicidade;
-                _metaOriginal.ValorMeta = MetaVendedor.ValorMeta;
-                _metaOriginal.TipoMeta = MetaVendedor.TipoMeta;
-
-                MessageBox.Show(Constantes.MsgMetaEditadaComSucesso);
-            }
-
-            FecharJanela?.Invoke();
-        }
-
-        public bool ValidarCampos()
-        {
-            try
-            {
-                var validacao = new MetaVendedorValidacao();
-
-                var metaDto = ConverterMeta();
-
-                var produtoDto = ConverterProduto();
-
-                var metasExistentes = ConverterListaMetas();
-
-                validacao.Validar(metaDto, metasExistentes, produtoDto);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-
-            return true;
-        }
-
-        private SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto ConverterMeta()
-        {
-            return new SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto
-            {
-                Id = MetaVendedor.Id,
-                NomeVendedor = MetaVendedor.NomeVendedor,
-                Produto = MetaVendedor.Produto,
-                Periodicidade = MetaVendedor.Periodicidade.ToString(),
-                ValorMeta = MetaVendedor.ValorMeta,
-                TipoMeta = MetaVendedor.TipoMeta
-            };
-        }
-
-        private SalesGoalManager.RegraDeNegocio.Dto.ProdutoDto ConverterProduto()
-
-        {
-            if (ProdutoSelecionado.IsNull())
-                return null;
-
-            return new SalesGoalManager.RegraDeNegocio.Dto.ProdutoDto
-            {
-                Id = ProdutoSelecionado.Id,
-                NomeProduto = ProdutoSelecionado.NomeProduto,
-                Categoria = (SalesGoalManager.RegraDeNegocio.Dto.ProdutoDto.CategoriaProduto)ProdutoSelecionado.Categoria
-            };
-        }
-
-        private ObservableCollection<SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto> ConverterListaMetas()
-        {
-            return new ObservableCollection<SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto>(
-                _listaMetas.Select(meta => new SalesGoalManager.RegraDeNegocio.Dto.MetaVendedorDto
-                {
-                    Id = meta.Id,
-                    NomeVendedor = meta.NomeVendedor,
-                    Produto = meta.Produto,
-                    Periodicidade = meta.Periodicidade.ToString(),
-                    ValorMeta = meta.ValorMeta,
-                    TipoMeta = meta.TipoMeta
-                })
-            );
         }
     }
 }

@@ -1,16 +1,12 @@
 ﻿using ProjetoCadastros.Interface;
+using SalesGoalManager.RegraDeNegocio;
 using SalesGoalManager.RegraDeNegocio.Comuns;
-using SalesGoalManager.RegraDeNegocio.Dto;
+using SalesGoalManager.RegraDeNegocio.Consultas;
 using SalesGoalManager.RegraDeNegocio.Extensoes;
 using SalesGoalManger.WPF.Comuns;
 using SalesGoalManger.WPF.RegraDeNegocio.Dto;
 using System.Collections.ObjectModel;
 using System.Windows;
-using MetaVendedorDto = SalesGoalManger.WPF.RegraDeNegocio.Dto.MetaVendedorDto;
-using Periodicidade = SalesGoalManger.WPF.RegraDeNegocio.Dto.Periodicidade;
-using SalesGoalManager.RegraDeNegocio.Consultas;
-using SalesGoalManager.RegraDeNegocio;
-using Microsoft.IdentityModel.Tokens;
 
 namespace SalesGoalManger.WPF.Interface.ViewModel
 {
@@ -18,24 +14,20 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
     {
         public TelaInicialDto Tela { get; set; }
 
-        private readonly MetaConsulta _metaConsulta = Fabrica.CriarMetaConsulta();
-
         public ObservableCollection<MetaVendedorDto> ListaMetas { get; set; }
 
         private ObservableCollection<MetaVendedorDto> _listaFiltrada;
-
-        private string _totalRegistros;
-
-        public string TotalRegistros
-        {
-            get => _totalRegistros;
-            set => SetProperty(ref _totalRegistros, value, nameof(TotalRegistros));
-        }
-
         public ObservableCollection<MetaVendedorDto> ListaFiltrada
         {
             get => _listaFiltrada;
             set => SetProperty(ref _listaFiltrada, value, nameof(ListaFiltrada));
+        }
+
+        private string _totalRegistros;
+        public string TotalRegistros
+        {
+            get => _totalRegistros;
+            set => SetProperty(ref _totalRegistros, value, nameof(TotalRegistros));
         }
 
         private MetaVendedorDto _metaSelecionada;
@@ -50,9 +42,7 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
             Tela = new TelaInicialDto();
 
             CriarComandos();
-
-            CarregarDados();
-
+            _ = CarregarDados();
             DefinirTotalRegistros();
         }
 
@@ -60,61 +50,24 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
         {
             try
             {
-                var metas = await _metaConsulta.ListarTodasAsync();
+                var metaConsulta = Fabrica.CriarMetaConsulta(); // DbContext novo, sem cache antigo
 
-                ListaMetas = new ObservableCollection<MetaVendedorDto>();
+                var metasRegraDeNegocio = await metaConsulta.ListarTodasAsync();
 
-                foreach (var meta in metas)
-                {
-                    var novaMeta = new MetaVendedorDto();
+                var metasWpf = metasRegraDeNegocio
+                    .Select(MetaVendedorMapper.ParaWpf)
+                    .ToList();
 
-                    novaMeta.Id = meta.Id;
-                    novaMeta.NomeVendedor = meta.NomeVendedor;
-                    //novaMeta.Periodicidade = meta.Periodicidade;
-                    novaMeta.Produto = meta.Produto;
-                    novaMeta.ProdutoNome = meta.ProdutoNome;
-                    novaMeta.ValorMeta = meta.ValorMeta;
-                    novaMeta.TipoMeta = meta.TipoMeta;
-
-                    ListaMetas.Add(novaMeta);
-                }
-
+                ListaMetas = new ObservableCollection<MetaVendedorDto>(metasWpf);
                 ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
+
+                DefinirTotalRegistros();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao carregar as metas: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        //private void CarregarMockMetas()
-        //{
-        //    ListaMetas = new ObservableCollection<MetaVendedorDto>
-        //    {
-        //        new MetaVendedorDto
-        //        {
-        //            Id = "1",
-        //            NomeVendedor = "João da Silva",
-        //            Periodicidade = Periodicidade.Mensal,
-        //            Produto = "1",
-        //            ProdutoNome = "Barris",
-        //            ValorMeta = 1500,
-        //            TipoMeta = TipoMeta.Unidades
-        //        },
-        //        new MetaVendedorDto
-        //        {
-        //            Id = "2",
-        //            NomeVendedor = "Maria Santos",
-        //            Periodicidade = Periodicidade.Semanal,
-        //            Produto = "2",
-        //            ProdutoNome = "Produto B",
-        //            TipoMeta = TipoMeta.Litros,
-        //            ValorMeta = 3000
-        //        }
-        //    };
-
-        //    ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
-        //}
 
         public void CriarComandos()
         {
@@ -129,29 +82,25 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
         {
             var lista = listaFiltrada ?? ListaMetas;
 
-            if (lista.IsNullOrEmpty())
+            if (lista is null || lista.Count == 0)
                 return;
 
             TotalRegistros = $"{lista.Count} Registro(s)";
         }
 
-        private void CadastrarMeta()
+        private async void CadastrarMeta()
         {
             var formCadastrarProduto = new CadastroMeta(ListaMetas);
 
             formCadastrarProduto.ShowDialog();
 
-            ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
-
-            DefinirTotalRegistros();
+            await CarregarDados();
         }
 
         public void LimparBusca()
         {
             Tela.TextoDeBusca = "";
-
             ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
-
             DefinirTotalRegistros();
         }
 
@@ -168,7 +117,6 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
                 x.TipoMeta.ToString().ToUpper().Contains(termo)).ToList();
 
             ListaFiltrada = new ObservableCollection<MetaVendedorDto>(filtrado);
-
             DefinirTotalRegistros(ListaFiltrada);
         }
 
@@ -188,7 +136,7 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
             }
         }
 
-        public void EditarMeta()
+        public async void EditarMeta()
         {
             if (MetaSelecionada.IsNull())
             {
@@ -200,9 +148,7 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
 
             formCadastro.ShowDialog();
 
-            ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
-
-            DefinirTotalRegistros();
+            await CarregarDados();
         }
     }
 }

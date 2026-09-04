@@ -1,5 +1,4 @@
-﻿using SalesGoalManager.RegraDeNegocio.Dto;
-using SalesGoalManger.WPF.Comuns;
+﻿using SalesGoalManger.WPF.Comuns;
 
 namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
 {
@@ -14,9 +13,15 @@ namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
             set => SetProperty(ref _periodicidade, value, nameof(Periodicidade));
         }
 
-        public string Produto { get; set; } //FK
-
+        public string Produto { get; set; }
         public string ProdutoNome { get; set; }
+
+        private string _vendedor;
+        public string Vendedor
+        {
+            get => _vendedor;
+            set => SetProperty(ref _vendedor, value, nameof(Vendedor));
+        }
 
         private TipoMeta _tipoMeta;
         public TipoMeta TipoMeta
@@ -33,14 +38,14 @@ namespace SalesGoalManger.WPF.RegraDeNegocio.Dto
         }
 
         private string _nomeVendedor;
-        public string NomeVendedor //FK
+        public string NomeVendedor
         {
             get => _nomeVendedor;
             set => SetProperty(ref _nomeVendedor, value, nameof(NomeVendedor));
         }
 
         private decimal _valorMeta;
-        public decimal ValorMeta //FK
+        public decimal ValorMeta
         {
             get => _valorMeta;
             set => SetProperty(ref _valorMeta, value, nameof(ValorMeta));
