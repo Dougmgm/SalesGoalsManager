@@ -11,6 +11,15 @@ namespace SalesGoalManager.RegraDeNegocio.Testes.Validacoes
     {
         private readonly MetaVendedorValidacao _validacao = new();
 
+        [Fact]
+        public async Task ListarTodosAsync_DeveRetornarProdutosDoBanco()
+        {
+            var consulta = Fabrica.CriarProdutoConsulta();
+            var produtos = await consulta.ListarTodosAsync();
+
+            Assert.NotEmpty(produtos);
+        }
+
         private static MetaVendedorDto CriarMetaValida()
         {
             return new MetaVendedorDto

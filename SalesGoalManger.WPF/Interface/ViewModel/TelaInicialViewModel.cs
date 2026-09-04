@@ -8,12 +8,18 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using MetaVendedorDto = SalesGoalManger.WPF.RegraDeNegocio.Dto.MetaVendedorDto;
 using Periodicidade = SalesGoalManger.WPF.RegraDeNegocio.Dto.Periodicidade;
+using SalesGoalManager.RegraDeNegocio.Consultas;
+using SalesGoalManager.RegraDeNegocio;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SalesGoalManger.WPF.Interface.ViewModel
 {
     public class TelaInicialViewModel : ViewModelBase
     {
         public TelaInicialDto Tela { get; set; }
+
+        private readonly MetaConsulta _metaConsulta = Fabrica.CriarMetaConsulta();
+
         public ObservableCollection<MetaVendedorDto> ListaMetas { get; set; }
 
         private ObservableCollection<MetaVendedorDto> _listaFiltrada;
@@ -42,39 +48,73 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
         public TelaInicialViewModel()
         {
             Tela = new TelaInicialDto();
+
             CriarComandos();
-            CarregarMockMetas();
+
+            CarregarDados();
+
             DefinirTotalRegistros();
         }
 
-        private void CarregarMockMetas()
+        public async Task CarregarDados()
         {
-            ListaMetas = new ObservableCollection<MetaVendedorDto>
+            try
             {
-                new MetaVendedorDto
-                {
-                    Id = "1",
-                    NomeVendedor = "João da Silva",
-                    Periodicidade = Periodicidade.Mensal,
-                    Produto = "1",
-                    ProdutoNome = "Barris",
-                    ValorMeta = 1500,
-                    TipoMeta = TipoMeta.Unidades
-                },
-                new MetaVendedorDto
-                {
-                    Id = "2",
-                    NomeVendedor = "Maria Santos",
-                    Periodicidade = Periodicidade.Semanal,
-                    Produto = "2",
-                    ProdutoNome = "Produto B",
-                    TipoMeta = TipoMeta.Litros,
-                    ValorMeta = 3000
-                }
-            };
+                var metas = await _metaConsulta.ListarTodasAsync();
 
-            ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
+                ListaMetas = new ObservableCollection<MetaVendedorDto>();
+
+                foreach (var meta in metas)
+                {
+                    var novaMeta = new MetaVendedorDto();
+
+                    novaMeta.Id = meta.Id;
+                    novaMeta.NomeVendedor = meta.NomeVendedor;
+                    //novaMeta.Periodicidade = meta.Periodicidade;
+                    novaMeta.Produto = meta.Produto;
+                    novaMeta.ProdutoNome = meta.ProdutoNome;
+                    novaMeta.ValorMeta = meta.ValorMeta;
+                    novaMeta.TipoMeta = meta.TipoMeta;
+
+                    ListaMetas.Add(novaMeta);
+                }
+
+                ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao carregar as metas: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+        //private void CarregarMockMetas()
+        //{
+        //    ListaMetas = new ObservableCollection<MetaVendedorDto>
+        //    {
+        //        new MetaVendedorDto
+        //        {
+        //            Id = "1",
+        //            NomeVendedor = "João da Silva",
+        //            Periodicidade = Periodicidade.Mensal,
+        //            Produto = "1",
+        //            ProdutoNome = "Barris",
+        //            ValorMeta = 1500,
+        //            TipoMeta = TipoMeta.Unidades
+        //        },
+        //        new MetaVendedorDto
+        //        {
+        //            Id = "2",
+        //            NomeVendedor = "Maria Santos",
+        //            Periodicidade = Periodicidade.Semanal,
+        //            Produto = "2",
+        //            ProdutoNome = "Produto B",
+        //            TipoMeta = TipoMeta.Litros,
+        //            ValorMeta = 3000
+        //        }
+        //    };
+
+        //    ListaFiltrada = new ObservableCollection<MetaVendedorDto>(ListaMetas);
+        //}
 
         public void CriarComandos()
         {
@@ -88,6 +128,9 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
         public void DefinirTotalRegistros(ObservableCollection<MetaVendedorDto> listaFiltrada = null)
         {
             var lista = listaFiltrada ?? ListaMetas;
+
+            if (lista.IsNullOrEmpty())
+                return;
 
             TotalRegistros = $"{lista.Count} Registro(s)";
         }

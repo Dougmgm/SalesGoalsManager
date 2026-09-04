@@ -1,4 +1,7 @@
-﻿using SalesGoalManager.RegraDeNegocio.Comuns;
+﻿using SalesGoalManager.RegraDeNegocio;
+using SalesGoalManager.RegraDeNegocio.Cadastros;
+using SalesGoalManager.RegraDeNegocio.Comuns;
+using SalesGoalManager.RegraDeNegocio.Consultas;
 using SalesGoalManager.RegraDeNegocio.Extensoes;
 using SalesGoalManager.RegraDeNegocio.Validacoes;
 using SalesGoalManger.WPF.Comuns;
@@ -23,8 +26,12 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
 
         ObservableCollection<MetaVendedorDto> _listaMetas;
 
-
         private bool _modoEdicao;
+
+        private readonly MetaCadastro _metaCadastro = Fabrica.CriarMetaCadastro();
+        private readonly ProdutoConsulta _produtoConsulta = Fabrica.CriarProdutoConsulta();
+        private readonly VendedorConsulta _vendedorConsulta = Fabrica.CriarVendedorConsulta();
+
 
         private ProdutoDto _produtoSelecionado;
         public ProdutoDto ProdutoSelecionado
@@ -126,6 +133,22 @@ namespace SalesGoalManger.WPF.Interface.ViewModel
 
         public void Salvar()
         {
+            try
+            {
+                await _metaCadastro.SalvarAsync(MetaVendedor, ProdutoSelecionado);
+
+                MessageBox.Show(_modoEdicao ? Constantes.MsgMetaEditadaComSucesso : Constantes.MsgMetaCadastrada);
+                FecharJanela?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+
+
             if (!ValidarCampos())
                 return;
 
