@@ -1,108 +1,324 @@
-# SalesGoalsManager
+# Sales Goals Manager
 
-Sistema para cadastro e gerenciamento de metas de vendas, desenvolvido em C#/.NET com WPF, seguindo uma estrutura separada entre interface, regras de negócio e API.
+Sistema para cadastro e gerenciamento de metas de vendas desenvolvido em **C#/.NET**, com arquitetura em camadas, aplicação desktop WPF, API REST e testes unitários.
 
-## Sobre o projeto
+O objetivo do projeto é permitir o gerenciamento de metas comerciais associadas a vendedores e produtos, aplicando regras de negócio específicas de acordo com o tipo de meta e categoria do produto.
 
-O Sales Goals Manager permite o cadastro de metas comerciais associadas a vendedores e produtos.
+---
 
-Uma meta possui informações como:
+# Funcionalidades
 
-Vendedor;
-Produto;
-Tipo de meta;
-Valor;
-Periodicidade.
+✅ Cadastro de vendedores
 
-Os tipos de meta contemplados são:
+✅ Cadastro de produtos
 
-R$ — Valor monetário
-L — Litros
-UN — Unidades
+✅ Cadastro de metas de vendas
 
-A aplicação também considera diferentes categorias de produtos e aplica regras específicas de acordo com o tipo de meta selecionado.
+✅ Consulta de metas cadastradas
 
-## Arquitetura
+✅ Validação de regras de negócio
 
-Uma das principais preocupações do projeto é manter as regras de negócio separadas da interface gráfica.
+✅ Persistência de dados em banco de dados SQL Server
 
-Entre as validações implementadas estão:
+✅ API REST para integração com aplicações externas
 
-Campos obrigatórios;
-Validação do valor informado;
-Compatibilidade entre o tipo de meta e o produto selecionado;
-Regras específicas para metas baseadas em litros;
-Validação das informações antes da persistência.
+✅ Testes unitários utilizando xUnit
 
-A ideia é evitar que essas regras fiquem diretamente acopladas aos eventos da interface WPF.
+---
 
-## Aplicações
+# Regras de Negócio
 
-A interface foi desenvolvida utilizando WPF, com XAML para definição das interfaces e C# para a implementação da aplicação.
+O sistema possui validações para garantir a consistência das informações cadastradas.
 
-A estrutura da aplicação desktop contém componentes específicos para:
+Algumas regras implementadas:
 
-Interface;
-Regras de negócio;
-Classes comuns;
-Extensões;
-Recursos visuais.
+- Não permitir cadastro de metas sem vendedor.
+- Não permitir cadastro de metas sem produto.
+- O valor da meta deve ser maior que zero.
+- Validação de campos obrigatórios.
+- Compatibilidade entre o tipo da meta e o produto selecionado.
+- Aplicação de regras específicas para metas baseadas em litros.
+- Validação das informações antes da persistência dos dados.
 
-O projeto utiliza uma abordagem orientada à separação de responsabilidades, buscando reduzir o acoplamento entre a interface e as regras do domínio.
+### Tipos de Meta
 
-## API
+| Tipo | Descrição |
+|--------|-----------|
+| R$ | Valor monetário |
+| L | Litros |
+| UN | Unidades |
 
-O projeto também possui uma aplicação ASP.NET Core Web API, responsável pela camada de serviços.
+### Periodicidade
 
-A API possui uma estrutura organizada em:
+As metas podem ser configuradas de acordo com a periodicidade definida pelo negócio.
 
-Controllers;
-Data;
-Models;
-Domain.
+---
 
-Isso permite que a aplicação desktop não seja o único consumidor possível das funcionalidades do sistema, criando uma base para futuras aplicações ou integrações.
+# Arquitetura da Solução
 
-## Tecnologias
+A solução foi desenvolvida seguindo o princípio de **separação de responsabilidades**, mantendo a interface desacoplada das regras de negócio.
 
-Desktop:
- - C#
- - .NET
- - WPF
- - XAML
-   
-Backend:
+```text
+SalesGoalsManager
+│
+├── SalesGoalManager.RegraDeNegocio
+├── SalesGoalManager.RegraDeNegocio.Testes
+├── SalesGoalManger.WPF
+└── SalesGoalsManager.Api
+```
 
- - ASP.NET Core
- - Web API
- - C#
+## SalesGoalManager.RegraDeNegocio
 
-Arquitetura e desenvolvimento:
+Camada responsável pela lógica de domínio da aplicação.
 
- - Orientação a Objetos
- - Separação de responsabilidades 
- - DTOs
- - Regras de negócio
- - REST
+Contém:
 
-Ferramentas:
+- Entidades
+- DTOs
+- Interfaces
+- Repositórios
+- Consultas
+- Validações
+- Extensões
+- Entity Framework Core
+- Contexto de banco de dados
 
- - Visual Studio
- - Git
- - GitHub
+### Principais entidades
+
+- Meta
+- Produto
+- Vendedor
+
+---
+
+## SalesGoalsManager.Api
+
+Projeto ASP.NET Core responsável por disponibilizar os serviços da aplicação.
+
+### Controllers
+
+- MetaController
+- ProdutoController
+- VendedorController
+
+A API permite que outras aplicações possam consumir as funcionalidades do sistema além da aplicação desktop.
+
+---
+
+## SalesGoalManger.WPF
+
+Aplicação Desktop desenvolvida utilizando WPF e padrão MVVM.
+
+### Estrutura
+
+- Views
+- ViewModels
+- Commands
+- Converters
+- Recursos visuais
+
+O objetivo é manter a interface desacoplada das regras de negócio, facilitando manutenção e evolução do sistema.
+
+---
+
+## SalesGoalManager.RegraDeNegocio.Testes
+
+Projeto responsável pelos testes unitários utilizando xUnit.
+
+O foco dos testes é garantir a integridade das validações e regras de negócio da aplicação.
+
+---
+
+# Padrões e Conceitos Utilizados
+
+- MVVM (Model-View-ViewModel)
+- Repository Pattern
+- DTO Pattern
+- Dependency Injection
+- Entity Framework Core
+- REST API
+- Orientação a Objetos
+- Separação de Responsabilidades
+- Validações de Domínio
+
+---
+
+# Persistência de Dados
+
+O projeto utiliza:
+
+- SQL Server
+- Entity Framework Core
+- Migrations (Code First)
+
+As tabelas e estruturas do banco de dados são gerenciadas através das migrations do Entity Framework.
+
+---
+
+# API
+
+A aplicação disponibiliza endpoints REST para manipulação dos dados.
+
+### Vendedores
+
+```http
+GET /Vendedor
+```
+
+### Produtos
+
+```http
+GET /Produto
+```
+
+### Metas
+
+```http
+GET /Meta
+```
+
+A documentação completa dos endpoints pode ser acessada através do Swagger ao executar a API.
+
+---
+
+# Tecnologias Utilizadas
+
+## Backend
+
+- C#
+- .NET 9
+- ASP.NET Core Web API
+- Entity Framework Core
+- SQL Server
+
+## Desktop
+
+- WPF
+- XAML
+- MVVM
 
 ## Testes
 
-Será executado testes unitários utilizando XUnit
+- xUnit
 
-## Autor
+## Ferramentas
 
-Douglas Menchon
+- Visual Studio
+- Git
+- GitHub
 
-Desenvolvedor .NET com experiência profissional em desenvolvimento e manutenção de sistemas corporativos.
+---
 
-Principais tecnologias:
+# Como Executar o Projeto
 
-C# · .NET · WPF · XAML · ASP.NET Core · REST APIs · Oracle/PL-SQL · SQL · Entity Framework · NUnit · Git
+## 1. Clonar o Repositório
 
-LinkedIn · GitHub
+```bash
+git clone https://github.com/Dougmgm/SalesGoalsManager.git
+```
+
+## 2. Restaurar Pacotes
+
+```bash
+dotnet restore
+```
+
+## 3. Atualizar o Banco de Dados
+
+```bash
+dotnet ef database update
+```
+
+## 4. Executar a API
+
+```bash
+dotnet run --project SalesGoalsManager.Api
+```
+
+## 5. Executar a Aplicação Desktop
+
+Abra a solução no Visual Studio e defina:
+
+```text
+SalesGoalManger.WPF
+```
+
+como projeto de inicialização.
+
+---
+
+# Telas
+
+## Tela Inicial
+
+
+
+---
+
+# Estrutura do Projeto
+
+```text
+SalesGoalManager.RegraDeNegocio
+├── Cadastro
+├── Consultas
+├── DTO
+├── Entidades
+├── Interfaces
+├── Repositorios
+├── Validacoes
+└── Migrations
+```
+
+---
+
+# Melhorias Futuras
+
+- [ ] Cadastro de vendedores
+- [ ] Cadastro de produtos
+- [ ] Exportação para Excel
+- [ ] Autenticação e autorização
+- [ ] Deploy da API em nuvem
+
+---
+
+# Testes
+
+Os testes unitários podem ser executados através do comando:
+
+```bash
+dotnet test
+```
+
+Atualmente os testes validam regras de negócio críticas da aplicação.
+
+---
+
+# Autor
+
+## Douglas Menchon
+
+Desenvolvedor .NET com experiência em desenvolvimento e manutenção de sistemas corporativos.
+
+### Tecnologias
+
+- C#
+- .NET
+- WPF
+- XAML
+- ASP.NET Core
+- Entity Framework Core
+- SQL Server
+- Oracle / PL-SQL
+- APIs REST
+- NUnit
+- xUnit
+- Git
+
+### Contato
+
+- LinkedIn: https://www.linkedin.com/in/douglas-menchon/
+- GitHub: https://github.com/Dougmgm
+
+---
+
+⭐ Projeto desenvolvido para estudo, aplicação de conceitos de arquitetura de software, orientação a objetos e desenvolvimento de aplicações corporativas utilizando a plataforma .NET.
