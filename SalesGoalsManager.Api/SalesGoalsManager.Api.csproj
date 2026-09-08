@@ -19,8 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SalesGoalManager.RegraDeNegocio\SalesGoalManager.RegraDeNegocio.csproj" />
-    <ProjectReference Include="..\SalesGoalsManager.Infrastructure\SalesGoalsManager.Infrastructure.csproj" />
-    <ProjectReference Include="..\SalesGoalsManager.Domain\SalesGoalsManager.Domain.csproj" />
+    <ProjectReference Include="..\SalesGoalsManager.RegraDeNegocio\SalesGoalsManager.RegraDeNegocio.csproj" />
   </ItemGroup>
 
 </Project>

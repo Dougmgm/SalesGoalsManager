@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalesGoalManager.RegraDeNegocio.Dto;
-using SalesGoalsManager.Infrastructure.Repositories;
+using SalesGoalsManager.RegraDeNegocio.Dto;
+using SalesGoalsManager.RegraDeNegocio.Entidades;
+using SalesGoalsManager.RegraDeNegocio.Repositorios;
 
 namespace SalesGoalsManager.Api.Controllers
 {
@@ -8,9 +9,9 @@ namespace SalesGoalsManager.Api.Controllers
     [Route("[controller]")]
     public class ProdutoController : ControllerBase
     {
-        private readonly ProdutoRepository _produtoRepository;
+        private readonly ProdutoRepositorio _produtoRepository;
 
-        public ProdutoController(ProdutoRepository produtoRepository)
+        public ProdutoController(ProdutoRepositorio produtoRepository)
         {
             _produtoRepository = produtoRepository;
         }

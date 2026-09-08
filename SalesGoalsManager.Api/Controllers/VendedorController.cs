@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalesGoalManager.RegraDeNegocio.Dto;
-using SalesGoalsManager.Infrastructure.Repositories;
+using SalesGoalsManager.RegraDeNegocio.Dto;
+using SalesGoalsManager.RegraDeNegocio.Entidades;
+using SalesGoalsManager.RegraDeNegocio.Repositorios;
 
 namespace SalesGoalsManager.Api.Controllers
 {
@@ -8,9 +9,9 @@ namespace SalesGoalsManager.Api.Controllers
     [Route("[controller]")]
     public class VendedorController : ControllerBase
     {
-        private readonly VendedorRepository _vendedorRepository;
+        private readonly VendedorRepositorio _vendedorRepository;
 
-        public VendedorController(VendedorRepository vendedorRepository)
+        public VendedorController(VendedorRepositorio vendedorRepository)
         {
             _vendedorRepository = vendedorRepository;
         }
@@ -23,7 +24,7 @@ namespace SalesGoalsManager.Api.Controllers
             var dtos = vendedores.Select(v => new VendedorDto
             {
                 Id = v.Id.ToString(),
-                NomeVendedor = v.Nome
+                NomeVendedor = v.NomeVendedor
             });
 
             return Ok(dtos);

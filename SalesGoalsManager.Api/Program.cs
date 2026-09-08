@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using SalesGoalsManager.Infrastructure.Data;
-using SalesGoalsManager.Infrastructure.Repositories;
+using SalesGoalsManager.RegraDeNegocio.Contexto;
+using SalesGoalsManager.RegraDeNegocio.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +11,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<SalesGoalsManagerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SalesGoalsManagerConnectionString")));
 
-builder.Services.AddScoped<MetaRepository>();
-builder.Services.AddScoped<ProdutoRepository>();
-builder.Services.AddScoped<VendedorRepository>();
+builder.Services.AddScoped<MetaRepositorio>();
+builder.Services.AddScoped<ProdutoRepositorio>();
+builder.Services.AddScoped<VendedorRepositorio>();
 
 var app = builder.Build();
 
