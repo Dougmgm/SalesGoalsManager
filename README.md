@@ -162,25 +162,19 @@ A aplicação disponibiliza endpoints REST para manipulação dos dados.
 ### Vendedores
 
 ```http
-GET /api/vendedor
-
-POST /api/vendedor
+GET /Vendedor
 ```
 
 ### Produtos
 
 ```http
-GET /api/produto
-
-POST /api/produto
+GET /Produto
 ```
 
 ### Metas
 
 ```http
-GET /api/meta
-
-POST /api/meta
+GET /Meta
 ```
 
 A documentação completa dos endpoints pode ser acessada através do Swagger ao executar a API.
