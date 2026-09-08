@@ -11,15 +11,6 @@ namespace SalesGoalsManager.RegraDeNegocio.Testes.Validacoes
     {
         private readonly MetaVendedorValidacao _validacao = new();
 
-        [Fact]
-        public async Task ListarTodosAsync_DeveRetornarProdutosDoBanco()
-        {
-            var consulta = ServiceFactory.CriarProdutoConsulta();
-            var produtos = await consulta.ListarTodosAsync();
-
-            Assert.NotEmpty(produtos);
-        }
-
         private static MetaVendedorDto CriarMetaValida()
         {
             return new MetaVendedorDto
@@ -51,6 +42,15 @@ namespace SalesGoalsManager.RegraDeNegocio.Testes.Validacoes
                 NomeProduto = "Acessórios e Produtos",
                 Categoria = ProdutoDto.CategoriaProduto.Diversos
             };
+        }
+
+        [Fact]
+        public async Task Listar_Todos_Async_Deve_Retornar_Produtos_Do_Banco()
+        {
+            var consulta = ServiceFactory.CriarProdutoConsulta();
+            var produtos = await consulta.ListarTodosAsync();
+
+            Assert.NotEmpty(produtos);
         }
 
         [Fact]

@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SalesGoalManager.RegraDeNegocio\SalesGoalManager.RegraDeNegocio.csproj" />
     <ProjectReference Include="..\SalesGoalsManager.RegraDeNegocio\SalesGoalsManager.RegraDeNegocio.csproj" />
   </ItemGroup>
 
