@@ -16,5 +16,9 @@
         public const string MsgSelecionarMeta = "Selecione uma meta.";
         public const string MsgMetaLitrosParaProdutoLiquido = "Metas em litros só podem ser atribuídas a produtos líquidos, como Barris ou Garrafas.";
         public const string MsgMetaEditadaComSucesso = "Meta editada com sucesso";
+        public const string MsgVendedorMesmoNome = "Já existe um vendedor cadastrado com esse nome.";
+        public const string MsgProdutoMesmoNome = "Já existe um produto cadastrado com esse nome.";
+        public const string MsgCategoriaNaoSelecionada = "Categoria não selecionada, favor preencher.";
+        public const string MsgNomeProdutoNaoPreenchido = "Nome do produto não preenchido, favor preencher.";
     }
 }

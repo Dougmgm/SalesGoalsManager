@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesGoalsManager.RegraDeNegocio.Cadastro;
 using SalesGoalsManager.RegraDeNegocio.Dto;
-using SalesGoalsManager.RegraDeNegocio.Entidades;
 using SalesGoalsManager.RegraDeNegocio.Repositorios;
 
 namespace SalesGoalsManager.Api.Controllers
@@ -9,26 +9,67 @@ namespace SalesGoalsManager.Api.Controllers
     [Route("[controller]")]
     public class ProdutoController : ControllerBase
     {
-        private readonly ProdutoRepositorio _produtoRepository;
+        private readonly ProdutoRepositorio _produtoRepositorio;
+        private readonly ProdutoCadastro _cadastroProduto;
 
-        public ProdutoController(ProdutoRepositorio produtoRepository)
+        public ProdutoController(ProdutoRepositorio produtoRepository, ProdutoCadastro produto)
         {
-            _produtoRepository = produtoRepository;
+            _produtoRepositorio = produtoRepository;
+            _cadastroProduto = produto;
         }
 
         [HttpGet]
         public async Task<IActionResult> ObterTodos()
         {
-            var produtos = await _produtoRepository.ObterTodosAsync();
+            var produtos = await _produtoRepositorio.ObterTodosAsync();
+            return Ok(produtos);
+        }
 
-            var dtos = produtos.Select(p => new ProdutoDto
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ObterPorId(string id)
+        {
+            var produto = await _produtoRepositorio.ObterPorIdAsync(id);
+
+            if (produto is null)
+                return NotFound();
+
+            return Ok(produto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Cadastrar([FromBody] ProdutoDto produto)
+        {
+            try
             {
-                Id = p.Id.ToString(),
-                NomeProduto = p.NomeProduto,
-                Categoria = p.Categoria
-            });
+                await _cadastroProduto.SalvarAsync(produto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
-            return Ok(dtos);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Atualizar(string id, [FromBody] ProdutoDto produto)
+        {
+            try
+            {
+                produto.Id = id;
+                await _cadastroProduto.SalvarAsync(produto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Excluir(string id)
+        {
+            await _cadastroProduto.ExcluirAsync(id);
+            return Ok();
         }
     }
 }

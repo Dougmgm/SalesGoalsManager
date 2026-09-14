@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SalesGoalManager.RegraDeNegocio.Interfaces;
+using SalesGoalsManager.RegraDeNegocio.Interfaces;
 using SalesGoalsManager.RegraDeNegocio.Contexto;
 using SalesGoalsManager.RegraDeNegocio.Dto;
 using SalesGoalsManager.RegraDeNegocio.Entidades;

@@ -32,5 +32,11 @@ namespace SalesGoalsManager.RegraDeNegocio
 
         public static VendedorConsulta CriarVendedorConsulta()
             => new VendedorConsulta(new VendedorRepositorio(CriarContexto()));
+
+        public static VendedorCadastro CreateVendedorService()
+            => new VendedorCadastro(new VendedorRepositorio(CriarContexto()), new CadastroVendedorValidacao());
+
+        public static ProdutoCadastro CreateProdutoService()
+            => new ProdutoCadastro(new ProdutoRepositorio(CriarContexto()), new CadastroProdutoValidacao());
     }
 }

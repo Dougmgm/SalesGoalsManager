@@ -132,7 +132,35 @@
                     Grid.Row="6"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
-            
+
+            <Button Grid.Column="0"
+                    Grid.Row="6"
+                    Content="+ Vendedor"
+                    Name="btnAddVendedor"
+                    Height="25"
+                    Width="80"
+                    Command="{Binding [CadastrarVendedor]}" 
+                    HorizontalAlignment="Left"
+                    Background="Gray"
+                    FontFamily="Montserrat"
+                    Foreground="White"
+                    BorderBrush="White">
+            </Button>
+
+            <Button Grid.Column="0"
+                    Grid.Row="6"
+                    Content="+ Produto"
+                    Name="btnAddProduto"
+                    Height="25"
+                    Width="80"
+                    Command="{Binding [CadastrarProduto]}" 
+                    HorizontalAlignment="Left"
+                    Background="Gray"
+                    FontFamily="Montserrat"
+                    Foreground="White"
+                    BorderBrush="White">
+            </Button>
+
             <Button Content="Editar"
                     Margin="0, 0, 15, 0"
                     Background="SteelBlue"

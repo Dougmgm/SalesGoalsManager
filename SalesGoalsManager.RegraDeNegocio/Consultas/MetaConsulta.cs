@@ -1,4 +1,4 @@
-﻿using SalesGoalManager.RegraDeNegocio.Interfaces;
+﻿using SalesGoalsManager.RegraDeNegocio.Interfaces;
 using SalesGoalsManager.RegraDeNegocio.Dto;
 
 namespace SalesGoalsManager.RegraDeNegocio.Consultas

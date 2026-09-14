@@ -1,8 +1,5 @@
-﻿using SalesGoalsManager.WPF.Interface;
-using SalesGoalsManager.RegraDeNegocio;
-using SalesGoalsManager.RegraDeNegocio.Cadastro;
+﻿using SalesGoalsManager.RegraDeNegocio;
 using SalesGoalsManager.RegraDeNegocio.Comuns;
-using SalesGoalsManager.RegraDeNegocio.Consultas;
 using SalesGoalsManager.RegraDeNegocio.Extensoes;
 using SalesGoalsManager.WPF.Comuns;
 using SalesGoalsManager.WPF.RegraDeNegocio.Dto;
@@ -77,6 +74,26 @@ namespace SalesGoalsManager.WPF.Interface.ViewModel
             _comandos["ExcluirMeta"] = new RelayCommand(x => ExcluirMeta());
             _comandos["EditarMeta"] = new RelayCommand(x => EditarMeta());
             _comandos["CadastrarMeta"] = new RelayCommand(x => CadastrarMeta());
+            _comandos["CadastrarVendedor"] = new RelayCommand(x => CadastrarVendedor());
+            _comandos["CadastrarProduto"] = new RelayCommand(x => CadastrarProduto());
+        }
+
+        public async void CadastrarProduto()
+        {
+            var formCadastrarProduto = new CadastroProduto();
+
+            formCadastrarProduto.ShowDialog();
+
+            await CarregarDados();
+        }
+
+        public async void CadastrarVendedor()
+        {
+            var formCadastrarVendedor = new CadastroVendedor();
+
+            formCadastrarVendedor.ShowDialog();
+
+            await CarregarDados();
         }
 
         public void DefinirTotalRegistros(ObservableCollection<MetaVendedorDto> listaFiltrada = null)
@@ -91,9 +108,9 @@ namespace SalesGoalsManager.WPF.Interface.ViewModel
 
         private async void CadastrarMeta()
         {
-            var formCadastrarProduto = new CadastroMeta(ListaMetas);
+            var formCadastrarMeta = new CadastroMeta(ListaMetas);
 
-            formCadastrarProduto.ShowDialog();
+            formCadastrarMeta.ShowDialog();
 
             await CarregarDados();
         }

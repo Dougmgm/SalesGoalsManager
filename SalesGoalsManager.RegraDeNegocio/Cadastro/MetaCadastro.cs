@@ -1,5 +1,5 @@
 ﻿using SalesGoalsManager.RegraDeNegocio.Dto;
-using SalesGoalManager.RegraDeNegocio.Interfaces;
+using SalesGoalsManager.RegraDeNegocio.Interfaces;
 using SalesGoalsManager.RegraDeNegocio.Validacoes;
 
 namespace SalesGoalsManager.RegraDeNegocio.Cadastro

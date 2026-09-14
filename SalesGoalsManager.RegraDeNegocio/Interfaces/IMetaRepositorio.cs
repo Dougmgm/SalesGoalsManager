@@ -1,6 +1,6 @@
 ﻿using SalesGoalsManager.RegraDeNegocio.Dto;
 
-namespace SalesGoalManager.RegraDeNegocio.Interfaces
+namespace SalesGoalsManager.RegraDeNegocio.Interfaces
 {
     public interface IMetaRepositorio
     {
