@@ -128,17 +128,17 @@
                 BorderBrush="White">
         </Button>
 
-        <StackPanel Grid.Column="2"
+        <StackPanel Grid.Column="1"
+                    Grid.ColumnSpan="2"
                     Grid.Row="6"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
 
-            <Button Grid.Column="0"
-                    Grid.Row="6"
-                    Content="+ Vendedor"
+            <Button Margin="0, 0, 15, 0"
+                    Content="Vendedor [+]"
                     Name="btnAddVendedor"
                     Height="25"
-                    Width="80"
+                    Width="85"
                     Command="{Binding [CadastrarVendedor]}" 
                     HorizontalAlignment="Left"
                     Background="Gray"
@@ -147,12 +147,11 @@
                     BorderBrush="White">
             </Button>
 
-            <Button Grid.Column="0"
-                    Grid.Row="6"
-                    Content="+ Produto"
+            <Button Margin="0, 0, 15, 0"
+                    Content="Produto [+]"
                     Name="btnAddProduto"
                     Height="25"
-                    Width="80"
+                    Width="85"
                     Command="{Binding [CadastrarProduto]}" 
                     HorizontalAlignment="Left"
                     Background="Gray"
@@ -166,7 +165,7 @@
                     Background="SteelBlue"
                     Name="btnEditar"
                     Height="25"
-                    Width="80"
+                    Width="85"
                     Command="{Binding [EditarMeta]}" 
                     FontFamily="Montserrat"
                     Foreground="White"
@@ -176,7 +175,7 @@
             <Button Content="Adicionar [+]"
                     Name="btnAdicionar"
                     Height="25"
-                    Width="80"
+                    Width="85"
                     Command="{Binding [CadastrarMeta]}" 
                     Background="Green"
                     FontFamily="Montserrat"

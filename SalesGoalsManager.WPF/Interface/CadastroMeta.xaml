@@ -130,7 +130,8 @@
                     <TextBlock Text="Valor da Meta"
                                Foreground="Gold"/>
                     <TextBox Height="20"
-                             PreviewTextInput="TextBox_PreviewTextInput">
+                             PreviewTextInput="TextBox_PreviewTextInput"
+                             MaxLength="11">
                         <TextBox.Text>
                             <MultiBinding Converter="{StaticResource ValorMetaFormatoConverter}"
                                           UpdateSourceTrigger="PropertyChanged">
